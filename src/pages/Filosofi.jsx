@@ -30,33 +30,33 @@ export default function Filosofi() {
   return (
     <div>
       {/* HERO */}
-      <section className="min-h-[30vh] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-20 border-b border-wr-border">
+      <section className="min-h-[25vh] md:min-h-[30vh] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-16 md:py-20 border-b border-wr-border">
         <div className="max-w-7xl mx-auto w-full">
-          <p className="section-label mb-4">Filosofi</p>
-          <h1 className="text-5xl md:text-6xl font-black tracking-tight text-wr-black mb-4 max-w-2xl">
+          <p className="section-label mb-3 md:mb-4">Filosofi</p>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-wr-black mb-3 md:mb-4 max-w-2xl">
             Dasar Pemikiran
           </h1>
-          <p className="text-lg text-wr-gray max-w-xl">
+          <p className="text-base md:text-lg text-wr-gray max-w-xl">
             Kemampuan berpikir bisa dilatih. Whiteroom menyediakan alatnya.
           </p>
         </div>
       </section>
 
       {/* KONTEN */}
-      <section className="py-20">
+      <section className="py-16 md:py-20">
         <div className="page-container">
           <div className="max-w-3xl mx-auto flex flex-col divide-y divide-wr-border">
             {sections.map((s) => (
-              <div key={s.nomor} className="py-12">
-                <div className="flex items-start gap-6">
-                  <span className="font-mono text-3xl font-bold text-gray-100 min-w-[3rem]">
+              <div key={s.nomor} className="py-8 md:py-12">
+                <div className="flex items-start gap-4 md:gap-6">
+                  <span className="font-mono text-2xl md:text-3xl font-bold text-gray-100 min-w-[2rem] md:min-w-[3rem]">
                     {s.nomor}
                   </span>
                   <div>
-                    <h2 className="text-sm font-mono font-bold tracking-widest text-wr-gray uppercase mb-4">
+                    <h2 className="text-xs md:text-sm font-mono font-bold tracking-widest text-wr-gray uppercase mb-3 md:mb-4">
                       {s.judul}
                     </h2>
-                    <p className="text-base text-wr-black leading-relaxed">{s.isi}</p>
+                    <p className="text-sm md:text-base text-wr-black leading-relaxed">{s.isi}</p>
                   </div>
                 </div>
               </div>
@@ -66,14 +66,14 @@ export default function Filosofi() {
       </section>
 
       {/* QUOTE */}
-      <section className="py-16 bg-wr-surface">
+      <section className="py-12 md:py-16 bg-wr-surface">
         <div className="page-container">
           <div className="max-w-3xl mx-auto">
-            <blockquote className="border-l-4 border-wr-black pl-8 py-4">
-              <p className="text-2xl md:text-3xl font-bold italic text-wr-black leading-relaxed mb-4">
+            <blockquote className="border-l-4 border-wr-black pl-6 md:pl-8 py-4">
+              <p className="text-xl md:text-2xl lg:text-3xl font-bold italic text-wr-black leading-relaxed mb-3 md:mb-4">
                 &ldquo;Otak yang tidak dilatih adalah potensi yang terbuang.&rdquo;
               </p>
-              <cite className="text-sm font-mono text-wr-gray tracking-widest uppercase not-italic">
+              <cite className="text-xs md:text-sm font-mono text-wr-gray tracking-widest uppercase not-italic">
                 — Whiteroom
               </cite>
             </blockquote>
