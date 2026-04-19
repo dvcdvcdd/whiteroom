@@ -11,12 +11,7 @@
     @apply bg-white text-wr-black font-sans antialiased;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     @apply font-bold tracking-tight;
   }
 }
@@ -36,13 +31,6 @@
            transition-all duration-200 cursor-pointer inline-block text-center;
   }
 
-  .btn-ghost {
-    @apply bg-transparent text-wr-gray px-6 py-3 text-sm font-semibold
-           tracking-widest uppercase border border-transparent
-           hover:text-wr-black hover:border-wr-border
-           transition-all duration-200 cursor-pointer inline-block text-center;
-  }
-
   .card-wr {
     @apply bg-white border border-wr-border p-6
            hover:border-wr-black hover:shadow-sm
@@ -52,11 +40,6 @@
   .section-label {
     @apply text-xs font-mono font-bold tracking-widest
            text-wr-gray uppercase mb-2;
-  }
-
-  .hero-section {
-    @apply min-h-hero flex flex-col justify-center
-           px-6 md:px-12 lg:px-24 py-16;
   }
 
   .page-container {

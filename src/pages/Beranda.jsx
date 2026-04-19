@@ -1,56 +1,27 @@
 import { Link } from 'react-router-dom'
 import { Brain, Target, Eye, Zap, Shield } from 'lucide-react'
-import SectionTitle from '../components/ui/SectionTitle'
 
 const pilar = [
-  {
-    icon: Brain,
-    judul: 'Logika',
-    desc: 'Kemampuan berpikir sistematis, deduktif, dan analitis dalam setiap situasi.',
-  },
-  {
-    icon: Target,
-    judul: 'Strategi',
-    desc: 'Perencanaan terstruktur dan taktik pengambilan keputusan yang efektif.',
-  },
-  {
-    icon: Eye,
-    judul: 'Observasi',
-    desc: 'Ketajaman dalam membaca situasi, pola, dan detail yang tidak terlihat oleh rata-rata.',
-  },
-  {
-    icon: Zap,
-    judul: 'Adaptasi',
-    desc: 'Kemampuan menyesuaikan diri dengan perubahan kondisi secara cepat dan efisien.',
-  },
-  {
-    icon: Shield,
-    judul: 'Pengendalian Diri',
-    desc: 'Kontrol respons emosional dalam situasi tekanan tinggi dan konflik.',
-  },
+  { icon: Brain, judul: 'Logika', desc: 'Berpikir sistematis, deduktif, dan analitis.', path: '/evaluasi/logika' },
+  { icon: Target, judul: 'Strategi', desc: 'Perencanaan dan pengambilan keputusan efektif.', path: '/evaluasi/strategi' },
+  { icon: Eye, judul: 'Observasi', desc: 'Membaca pola dan detail tersembunyi.', path: '/evaluasi/observasi' },
+  { icon: Zap, judul: 'Memori', desc: 'Memori dan daya ingat jangka pendek.', path: '/evaluasi/memori' },
+  { icon: Shield, judul: 'Kontrol Emosi', desc: 'Kontrol emosi di bawah tekanan.', path: '/evaluasi/emosi' },
 ]
 
-const statistik = [
-  { angka: '1.247', label: 'Subjek Terdaftar' },
-  { angka: '8.903', label: 'Evaluasi Diselesaikan' },
-  { angka: '67.4', label: 'Rata-rata Skor' },
-  { angka: 'Elite', label: 'Level Tertinggi' },
-]
-
-const prinsip = [
-  'Kelemahan diidentifikasi.',
-  'Performa diukur secara presisi.',
-  'Kemampuan dibentuk secara sistematis.',
+const caraKerja = [
+  { nomor: '01', judul: 'Pilih Tes', desc: 'Pilih salah satu dari 5 kategori tes yang tersedia.' },
+  { nomor: '02', judul: 'Kerjakan Soal', desc: 'Soal diacak setiap sesi. Timer berjalan saat tes dimulai.' },
+  { nomor: '03', judul: 'Review Hasil', desc: 'Skor langsung muncul. Lihat review tiap soal beserta penjelasannya.' },
 ]
 
 export default function Beranda() {
   return (
     <div>
-      {/* SECTION 1: HERO */}
-      <section className="min-h-hero-lg flex flex-col justify-center px-6 md:px-12 lg:px-24 py-20 bg-white relative overflow-hidden">
-        {/* Grid dekoratif samar */}
+      {/* HERO */}
+      <section className="min-h-[40vh] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-16 md:py-20 relative overflow-hidden">
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage:
               'linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px)',
@@ -58,128 +29,93 @@ export default function Beranda() {
           }}
         />
         <div className="relative max-w-7xl mx-auto w-full">
-          <p className="section-label mb-4">
-            Fasilitas Pelatihan Elit Digital
-          </p>
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tight text-wr-black leading-none mb-4">
+          <p className="section-label mb-3 md:mb-4">Evaluasi Kemampuan Berpikir</p>
+          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-tight text-wr-black leading-[0.9] mb-4 md:mb-6">
             WHITE
             <br />
             ROOM
           </h1>
-          <p className="text-lg md:text-xl font-medium text-wr-gray mb-3 max-w-xl">
-            Lingkungan Terkontrol untuk Optimalisasi Individu
+          <p className="text-base md:text-xl text-wr-gray mb-2 md:mb-3 max-w-lg">
+            Asah kemampuan berpikir. Ukur hasilnya.
           </p>
-          <p className="text-sm text-wr-gray leading-relaxed max-w-lg mb-10">
-            Whiteroom adalah sistem evaluasi dan pelatihan digital yang
-            dirancang untuk mengidentifikasi, menganalisis, dan mengembangkan
-            kemampuan individu secara sistematis dan terukur.
+          <p className="text-xs md:text-sm text-wr-gray max-w-md mb-8 md:mb-10 leading-relaxed">
+            Serangkaian tes terstruktur untuk melatih logika, memori, observasi,
+            strategi, dan pengendalian diri. Soal diacak setiap sesi. Review
+            jawaban tersedia setelah tes selesai.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link to="/evaluasi" className="btn-primary">
-              Mulai Evaluasi
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <Link to="/evaluasi" className="btn-primary text-center">
+              Mulai Tes
             </Link>
-            <Link to="/filosofi" className="btn-outline">
-              Pelajari Filosofi
+            <Link to="/filosofi" className="btn-outline text-center">
+              Filosofi
             </Link>
-          </div>
-          {/* Elemen dekoratif monospace */}
-          <div className="mt-12 font-mono text-xs text-gray-200 select-none hidden md:block">
-            <p>// SISTEM AKTIF — EVALUASI TERSEDIA</p>
-            <p>// PROTOKOL: WR-EVAL-v1.0 — SUBJEK: ANONIM</p>
           </div>
         </div>
       </section>
 
-      {/* SECTION 2: 5 PILAR */}
-      <section className="py-20 bg-wr-surface">
+      {/* 5 KATEGORI */}
+      <section className="py-16 md:py-20 bg-wr-surface border-y border-wr-border">
         <div className="page-container">
-          <SectionTitle
-            label="Pilar Utama"
-            title="Fondasi Whiteroom"
-            subtitle="Lima kemampuan inti yang menjadi dasar pengukuran dan pengembangan setiap subjek."
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          <p className="section-label mb-6 md:mb-8">Lima Kategori Tes</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
             {pilar.map((p) => {
               const Icon = p.icon
               return (
-                <div
+                <Link
                   key={p.judul}
-                  className="card-wr flex flex-col gap-4"
+                  to={p.path}
+                  className="card-wr flex flex-col gap-3 group"
                 >
-                  <div className="w-10 h-10 border border-wr-border flex items-center justify-center">
+                  <div className="w-10 h-10 border border-wr-border flex items-center justify-center group-hover:border-wr-black transition-colors">
                     <Icon size={18} className="text-wr-black" />
                   </div>
                   <h3 className="text-sm font-bold tracking-widest uppercase text-wr-black">
                     {p.judul}
                   </h3>
-                  <p className="text-sm text-wr-gray leading-relaxed">
-                    {p.desc}
-                  </p>
-                </div>
+                  <p className="text-sm text-wr-gray leading-relaxed">{p.desc}</p>
+                  <span className="text-xs font-mono text-wr-gray group-hover:text-wr-black transition-colors mt-auto">
+                    Mulai tes →
+                  </span>
+                </Link>
               )
             })}
           </div>
         </div>
       </section>
 
-      {/* SECTION 3: PRINSIP */}
-      <section className="py-24 bg-white">
+      {/* CARA KERJA */}
+      <section className="py-16 md:py-20">
         <div className="page-container">
-          <p className="section-label mb-8">Prinsip Dasar</p>
-          <div className="flex flex-col divide-y divide-wr-border">
-            {prinsip.map((kalimat, i) => (
-              <div
-                key={i}
-                className="py-8 flex items-start gap-6"
-              >
-                <span className="font-mono text-xs text-gray-300 mt-1 min-w-[2rem]">
-                  0{i + 1}
+          <p className="section-label mb-6 md:mb-8">Cara Kerja</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-px md:bg-wr-border max-w-3xl">
+            {caraKerja.map((step) => (
+              <div key={step.nomor} className="bg-white p-6 md:p-8 border border-wr-border md:border-0">
+                <span className="font-mono text-2xl md:text-3xl font-bold text-gray-100 block mb-3 md:mb-4">
+                  {step.nomor}
                 </span>
-                <p className="text-2xl md:text-3xl lg:text-4xl font-bold text-wr-black leading-tight italic">
-                  &ldquo;{kalimat}&rdquo;
-                </p>
+                <h3 className="text-sm font-bold tracking-widest uppercase text-wr-black mb-2">
+                  {step.judul}
+                </h3>
+                <p className="text-sm text-wr-gray leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 4: STATISTIK */}
-      <section className="py-20 bg-wr-muted">
-        <div className="page-container">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-wr-border">
-            {statistik.map((s) => (
-              <div
-                key={s.label}
-                className="bg-white flex flex-col justify-center items-center py-12 px-6 text-center"
-              >
-                <span className="text-4xl md:text-5xl font-black font-mono text-wr-black leading-none mb-2">
-                  {s.angka}
-                </span>
-                <span className="text-xs font-mono text-wr-gray tracking-widest uppercase">
-                  {s.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 5: CTA AKHIR */}
-      <section className="bg-wr-black py-24">
+      {/* CTA */}
+      <section className="bg-wr-black py-16 md:py-20">
         <div className="page-container text-center">
-          <p className="text-xs font-mono tracking-widest text-gray-500 uppercase mb-4">
-            Langkah Pertama
-          </p>
-          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
-            Siap Untuk Dievaluasi?
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-tight mb-4">
+            Siap Mengasah Otakmu?
           </h2>
-          <p className="text-gray-400 text-lg mb-10 max-w-md mx-auto">
-            Masuki Whiteroom dan ketahui kemampuan sebenarnya.
+          <p className="text-gray-400 text-sm md:text-base mb-6 md:mb-8 max-w-md mx-auto">
+            Pilih kategori tes dan mulai sekarang. Tanpa akun, tanpa ribet.
           </p>
           <Link
             to="/evaluasi"
-            className="inline-block text-sm font-semibold tracking-widest uppercase px-8 py-4 border border-white text-white hover:bg-white hover:text-wr-black transition-all duration-200"
+            className="inline-block text-sm font-semibold tracking-widest uppercase px-6 py-3 md:px-8 md:py-4 border border-white text-white hover:bg-white hover:text-wr-black transition-all duration-200"
           >
             Mulai Sekarang
           </Link>

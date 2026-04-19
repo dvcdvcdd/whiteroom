@@ -3,46 +3,46 @@ export default function Filosofi() {
     {
       nomor: '01',
       judul: 'MENGAPA WHITEROOM ADA',
-      isi: 'Whiteroom lahir dari satu pertanyaan mendasar: mengapa sebagian individu mampu melampaui batasnya, sementara yang lain tidak? Jawabannya bukan pada bakat bawaan, melainkan pada sistem. Sistem evaluasi yang tepat, pelatihan yang terstruktur, dan lingkungan yang dikontrol adalah variabel penentu. Whiteroom adalah sistem tersebut. Kami percaya bahwa setiap individu memiliki kapasitas tersembunyi yang belum tereksplor—dan tugas kami adalah menciptakan kondisi di mana kapasitas itu dapat diidentifikasi, diukur, dan dikembangkan.',
+      isi: 'Whiteroom lahir dari satu pertanyaan: mengapa sebagian individu mampu berpikir lebih tajam dari yang lain? Jawabannya bukan bakat bawaan — melainkan latihan yang konsisten dan terstruktur. Whiteroom menyediakan latihan itu.',
     },
     {
       nomor: '02',
       judul: 'PRINSIP KEUNGGULAN',
-      isi: 'Keunggulan bukan kondisi yang diwarisi, melainkan hasil dari proses berulang yang disengaja. Di Whiteroom, keunggulan didefinisikan sebagai kemampuan untuk berfungsi secara optimal di bawah kondisi apapun. Bukan hanya saat kondisi ideal, tetapi justru saat tekanan, ambiguitas, dan keterbatasan menjadi variabel dominan. Individu yang unggul adalah mereka yang tidak hanya mampu tampil baik di kondisi nyaman, tetapi yang dapat mempertahankan performa di bawah tekanan yang terus meningkat.',
+      isi: 'Keunggulan berpikir bukan kondisi bawaan, melainkan hasil dari proses berulang yang disengaja. Otak yang terlatih memproses informasi lebih cepat, mengenali pola lebih tajam, dan membuat keputusan lebih tepat.',
     },
     {
       nomor: '03',
       judul: 'RASIONALITAS DI ATAS REAKSI',
-      isi: 'Emosi adalah data, bukan instruksi. Whiteroom tidak melatih individu untuk menekan emosi, melainkan untuk memahaminya sebagai sinyal yang dapat dianalisis. Keputusan terbaik lahir dari analisis dingin, bukan dari impuls reaktif. Individu yang mampu membedakan keduanya memiliki keunggulan signifikan dalam setiap situasi kompetitif. Rasionalitas bukan berarti ketidakpedulian—melainkan kemampuan untuk memproses informasi emosional tanpa membiarkannya mendominasi proses pengambilan keputusan.',
+      isi: 'Emosi adalah data, bukan instruksi. Keputusan terbaik lahir dari analisis, bukan impuls. Whiteroom melatih kemampuan membedakan keduanya melalui tes kontrol emosi.',
     },
     {
       nomor: '04',
-      judul: 'ADAPTASI ATAU TERTINGGAL',
-      isi: 'Kondisi selalu berubah. Strategi yang berhasil kemarin belum tentu relevan hari ini. Kemampuan adaptasi bukan sekadar fleksibilitas, melainkan kapasitas untuk membaca perubahan lebih awal dari yang lain, merespons lebih cepat, dan menemukan keuntungan dalam ketidakpastian. Itulah yang dilatih di Whiteroom. Mereka yang stagnan dalam pola pikir lama akan selalu berada di belakang mereka yang terus memperbarui model mental mereka berdasarkan informasi baru.',
+      judul: 'LATIHAN ADALAH KUNCI',
+      isi: 'Tidak ada jalan pintas untuk otak yang tajam. Seperti otot yang perlu dilatih, kemampuan kognitif membutuhkan stimulus berulang. Setiap tes yang dikerjakan adalah satu langkah menuju pemikiran yang lebih jernih.',
     },
     {
       nomor: '05',
-      judul: 'DISIPLIN SEBAGAI FONDASI',
-      isi: 'Tanpa disiplin, semua strategi hanya teori. Whiteroom percaya bahwa konsistensi dalam hal-hal kecil adalah cerminan kemampuan dalam hal-hal besar. Setiap sesi latihan, setiap misi yang diselesaikan, setiap evaluasi yang dihadapi dengan jujur adalah batu bata yang membangun fondasi keunggulan. Disiplin bukan hukuman—melainkan bentuk penghormatan tertinggi terhadap potensi diri sendiri. Mereka yang disiplin dalam proses kecil adalah mereka yang siap untuk tantangan besar.',
+      judul: 'UKUR, BUKAN TEBAK',
+      isi: 'Tanpa pengukuran, tidak ada perbaikan. Whiteroom menampilkan skor langsung setelah tes selesai — bukan untuk menghakimi, tapi untuk menunjukkan titik pijak dan arah perkembangan.',
     },
   ]
 
   return (
     <div>
       {/* HERO */}
-      <section className="min-h-hero flex flex-col justify-center px-6 md:px-12 lg:px-24 py-20 border-b border-wr-border">
+      <section className="min-h-[30vh] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-20 border-b border-wr-border">
         <div className="max-w-7xl mx-auto w-full">
           <p className="section-label mb-4">Filosofi</p>
           <h1 className="text-5xl md:text-6xl font-black tracking-tight text-wr-black mb-4 max-w-2xl">
-            Dasar Pemikiran Whiteroom
+            Dasar Pemikiran
           </h1>
           <p className="text-lg text-wr-gray max-w-xl">
-            Setiap individu memiliki batas. Batas itu dapat digeser.
+            Kemampuan berpikir bisa dilatih. Whiteroom menyediakan alatnya.
           </p>
         </div>
       </section>
 
-      {/* KONTEN ARTIKEL */}
+      {/* KONTEN */}
       <section className="py-20">
         <div className="page-container">
           <div className="max-w-3xl mx-auto flex flex-col divide-y divide-wr-border">
@@ -56,9 +56,7 @@ export default function Filosofi() {
                     <h2 className="text-sm font-mono font-bold tracking-widest text-wr-gray uppercase mb-4">
                       {s.judul}
                     </h2>
-                    <p className="text-base text-wr-black leading-relaxed">
-                      {s.isi}
-                    </p>
+                    <p className="text-base text-wr-black leading-relaxed">{s.isi}</p>
                   </div>
                 </div>
               </div>
@@ -67,14 +65,13 @@ export default function Filosofi() {
         </div>
       </section>
 
-      {/* QUOTE PENUTUP */}
-      <section className="py-20 bg-wr-surface">
+      {/* QUOTE */}
+      <section className="py-16 bg-wr-surface">
         <div className="page-container">
           <div className="max-w-3xl mx-auto">
             <blockquote className="border-l-4 border-wr-black pl-8 py-4">
               <p className="text-2xl md:text-3xl font-bold italic text-wr-black leading-relaxed mb-4">
-                &ldquo;Individu yang tidak berkembang adalah individu yang
-                memilih untuk mundur.&rdquo;
+                &ldquo;Otak yang tidak dilatih adalah potensi yang terbuang.&rdquo;
               </p>
               <cite className="text-sm font-mono text-wr-gray tracking-widest uppercase not-italic">
                 — Whiteroom

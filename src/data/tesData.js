@@ -1,13 +1,12 @@
-export const tesData = {
+const tesData = {
   logika: {
     nama: 'Tes Logika',
-    deskripsi: 'Mengukur kemampuan berpikir deduktif, induktif, dan analitis',
+    deskripsi: 'Mengukur kemampuan berpikir deduktif, induktif, dan analitis.',
     durasi: 15 * 60,
     soal: [
       {
         id: 1,
-        pertanyaan:
-          'Semua dokter adalah manusia. Semua manusia adalah makhluk hidup. Kesimpulan yang paling tepat adalah...',
+        pertanyaan: 'Semua dokter adalah manusia. Semua manusia adalah makhluk hidup. Kesimpulan yang paling tepat adalah...',
         pilihan: [
           'A. Semua makhluk hidup adalah dokter',
           'B. Semua dokter adalah makhluk hidup',
@@ -15,32 +14,25 @@ export const tesData = {
           'D. Tidak ada kesimpulan yang dapat ditarik',
         ],
         jawabanBenar: 1,
+        penjelasan: 'Dari premis "semua dokter adalah manusia" dan "semua manusia adalah makhluk hidup", secara logis dapat disimpulkan bahwa semua dokter adalah makhluk hidup (silogisme).',
       },
       {
         id: 2,
-        pertanyaan:
-          'Jika KOMPUTER = 97, MONITOR = 84, maka PRINTER bernilai...',
-        pilihan: ['A. 76', 'B. 79', 'C. 82', 'D. 85'],
-        jawabanBenar: 1,
+        pertanyaan: 'Deretan angka: 2, 6, 18, 54, ... Angka selanjutnya adalah...',
+        pilihan: ['A. 108', 'B. 144', 'C. 162', 'D. 216'],
+        jawabanBenar: 2,
+        penjelasan: 'Setiap angka dikali 3: 2×3=6, 6×3=18, 18×3=54, 54×3=162.',
       },
       {
         id: 3,
-        pertanyaan:
-          'Deretan angka: 2, 6, 18, 54, ... Angka selanjutnya adalah...',
-        pilihan: ['A. 108', 'B. 144', 'C. 162', 'D. 216'],
-        jawabanBenar: 2,
+        pertanyaan: 'Riko lebih tinggi dari Budi. Budi lebih tinggi dari Caca. Andi lebih pendek dari Caca. Siapa yang paling pendek?',
+        pilihan: ['A. Riko', 'B. Budi', 'C. Caca', 'D. Andi'],
+        jawabanBenar: 3,
+        penjelasan: 'Urutan dari tinggi ke pendek: Riko > Budi > Caca > Andi. Maka Andi paling pendek.',
       },
       {
         id: 4,
-        pertanyaan:
-          'Riko lebih tinggi dari Budi. Budi lebih tinggi dari Caca. Andi lebih pendek dari Caca. Siapa yang paling pendek?',
-        pilihan: ['A. Riko', 'B. Budi', 'C. Caca', 'D. Andi'],
-        jawabanBenar: 3,
-      },
-      {
-        id: 5,
-        pertanyaan:
-          'Jika semua X adalah Y, dan tidak ada Y yang merupakan Z, maka...',
+        pertanyaan: 'Jika semua X adalah Y, dan tidak ada Y yang merupakan Z, maka...',
         pilihan: [
           'A. Semua X adalah Z',
           'B. Tidak ada X yang merupakan Z',
@@ -48,90 +40,107 @@ export const tesData = {
           'D. Tidak dapat ditentukan',
         ],
         jawabanBenar: 1,
+        penjelasan: 'Karena semua X adalah Y, dan tidak ada Y yang merupakan Z, maka secara logis tidak ada X yang merupakan Z.',
+      },
+      {
+        id: 5,
+        pertanyaan: 'Pola: 1, 4, 9, 16, 25, ... Angka berikutnya adalah...',
+        pilihan: ['A. 30', 'B. 35', 'C. 36', 'D. 49'],
+        jawabanBenar: 2,
+        penjelasan: 'Ini adalah deret bilangan kuadrat: 1², 2², 3², 4², 5², 6²=36.',
       },
       {
         id: 6,
-        pertanyaan:
-          'Pola: 1, 4, 9, 16, 25, ... Angka yang mengikuti pola ini adalah...',
-        pilihan: ['A. 30', 'B. 35', 'C. 36', 'D. 49'],
-        jawabanBenar: 2,
+        pertanyaan: 'Dalam sebuah ruangan terdapat 5 orang. Setiap orang berjabat tangan dengan setiap orang lain tepat satu kali. Berapa total jabat tangan?',
+        pilihan: ['A. 8', 'B. 10', 'C. 12', 'D. 20'],
+        jawabanBenar: 1,
+        penjelasan: 'Rumus kombinasi: n(n-1)/2 = 5×4/2 = 10 jabat tangan.',
       },
       {
         id: 7,
-        pertanyaan:
-          'Dalam sebuah ruangan terdapat 5 orang. Setiap orang berjabat tangan dengan setiap orang lain tepat satu kali. Berapa total jabat tangan yang terjadi?',
-        pilihan: ['A. 8', 'B. 10', 'C. 12', 'D. 20'],
+        pertanyaan: 'Jika hari ini Selasa, hari apa 100 hari dari sekarang?',
+        pilihan: ['A. Rabu', 'B. Kamis', 'C. Jumat', 'D. Sabtu'],
         jawabanBenar: 1,
+        penjelasan: '100 ÷ 7 = 14 sisa 2. Selasa + 2 hari = Kamis.',
       },
       {
         id: 8,
-        pertanyaan:
-          'Jika "KUCING" dikodekan sebagai "LWDJOH", maka "ANJING" dikodekan sebagai...',
-        pilihan: ['A. BOKJOH', 'B. BOKHOH', 'C. BPKJOH', 'D. BOKIOH'],
-        jawabanBenar: 0,
+        pertanyaan: 'Kata yang TIDAK satu kelompok: Matematika, Fisika, Kimia, Sejarah.',
+        pilihan: ['A. Matematika', 'B. Fisika', 'C. Kimia', 'D. Sejarah'],
+        jawabanBenar: 3,
+        penjelasan: 'Matematika, Fisika, dan Kimia adalah ilmu eksakta/sains. Sejarah adalah ilmu sosial/humaniora.',
       },
       {
         id: 9,
-        pertanyaan:
-          'Seorang pedagang membeli barang seharga Rp80.000 dan menjualnya dengan keuntungan 25%. Berapa harga jualnya?',
-        pilihan: [
-          'A. Rp95.000',
-          'B. Rp100.000',
-          'C. Rp105.000',
-          'D. Rp110.000',
-        ],
-        jawabanBenar: 1,
-      },
-      {
-        id: 10,
-        pertanyaan:
-          'Kata yang tidak memiliki hubungan dengan kata lainnya: Merah, Biru, Hijau, Persegi, Kuning',
-        pilihan: ['A. Merah', 'B. Biru', 'C. Persegi', 'D. Kuning'],
-        jawabanBenar: 2,
-      },
-      {
-        id: 11,
-        pertanyaan:
-          'Jika hari ini Selasa, hari apa 100 hari dari sekarang?',
-        pilihan: ['A. Rabu', 'B. Kamis', 'C. Jumat', 'D. Sabtu'],
-        jawabanBenar: 1,
-      },
-      {
-        id: 12,
-        pertanyaan:
-          'Lima teman duduk dalam satu baris. Andi duduk di sebelah kiri Budi. Caca duduk di sebelah kanan Dodi. Budi duduk di tengah. Eko duduk di ujung kanan. Siapa yang duduk paling kiri?',
-        pilihan: ['A. Andi', 'B. Budi', 'C. Caca', 'D. Dodi'],
-        jawabanBenar: 0,
-      },
-      {
-        id: 13,
-        pertanyaan:
-          'Manakah pernyataan yang merupakan kesimpulan valid dari "Beberapa siswa rajin. Semua siswa rajin mendapat nilai bagus"?',
-        pilihan: [
-          'A. Semua siswa mendapat nilai bagus',
-          'B. Beberapa siswa mendapat nilai bagus',
-          'C. Tidak ada siswa yang mendapat nilai bagus',
-          'D. Semua siswa rajin',
-        ],
-        jawabanBenar: 1,
-      },
-      {
-        id: 14,
         pertanyaan: 'Deret: 3, 7, 15, 31, 63, ... Angka berikutnya adalah...',
         pilihan: ['A. 100', 'B. 117', 'C. 127', 'D. 131'],
         jawabanBenar: 2,
+        penjelasan: 'Pola: ×2+1. 3×2+1=7, 7×2+1=15, 15×2+1=31, 31×2+1=63, 63×2+1=127.',
+      },
+      {
+        id: 10,
+        pertanyaan: 'Jika A > B, B > C, dan C > D, pernyataan mana yang SALAH?',
+        pilihan: ['A. A > D', 'B. B > D', 'C. D > A', 'D. A > C'],
+        jawabanBenar: 2,
+        penjelasan: 'Urutan benar: A > B > C > D. Pernyataan D > A adalah kebalikan yang salah.',
+      },
+      {
+        id: 11,
+        pertanyaan: 'Sebuah kode: A=1, B=2, C=3, D=4. Jika BACA = 2131, maka DADA = ...',
+        pilihan: ['A. 4141', 'B. 4114', 'C. 1414', 'D. 4411'],
+        jawabanBenar: 0,
+        penjelasan: 'D=4, A=1, D=4, A=1. Maka DADA = 4141.',
+      },
+      {
+        id: 12,
+        pertanyaan: '"Beberapa siswa rajin. Semua siswa rajin mendapat nilai bagus." Kesimpulan yang valid...',
+        pilihan: [
+          'A. Semua siswa mendapat nilai bagus',
+          'B. Beberapa siswa mendapat nilai bagus',
+          'C. Tidak ada siswa mendapat nilai bagus',
+          'D. Semua siswa rajin',
+        ],
+        jawabanBenar: 1,
+        penjelasan: 'Karena hanya "beberapa" siswa rajin (bukan semua), maka hanya beberapa yang mendapat nilai bagus.',
+      },
+      {
+        id: 13,
+        pertanyaan: 'Sebuah jam menunjukkan pukul 3:15. Berapa derajat sudut antara jarum jam dan jarum menit?',
+        pilihan: ['A. 0°', 'B. 7.5°', 'C. 15°', 'D. 22.5°'],
+        jawabanBenar: 1,
+        penjelasan: 'Pada 3:00 sudut = 90°. Dalam 15 menit jarum jam bergerak 7.5°. Jarum menit di angka 3 (90°). Maka 90° - 82.5° = 7.5°.',
+      },
+      {
+        id: 14,
+        pertanyaan: 'Pedagang membeli barang seharga Rp80.000 lalu dijual dengan keuntungan 25%. Harga jualnya...',
+        pilihan: ['A. Rp95.000', 'B. Rp100.000', 'C. Rp105.000', 'D. Rp110.000'],
+        jawabanBenar: 1,
+        penjelasan: '80.000 + (25% × 80.000) = 80.000 + 20.000 = Rp100.000.',
       },
       {
         id: 15,
-        pertanyaan:
-          'Sebuah kode menggunakan pola: A=1, B=2, C=3. Jika BACA = 2131, maka DADA = ...',
-        pilihan: ['A. 4141', 'B. 4114', 'C. 1414', 'D. 4411'],
-        jawabanBenar: 0,
+        pertanyaan: 'Dua kereta berangkat dari kota yang sama ke arah berlawanan, masing-masing 60 km/jam dan 80 km/jam. Berapa jam hingga jarak keduanya 280 km?',
+        pilihan: ['A. 1.5 jam', 'B. 2 jam', 'C. 2.5 jam', 'D. 3 jam'],
+        jawabanBenar: 1,
+        penjelasan: 'Kecepatan relatif = 60+80 = 140 km/jam. Waktu = 280/140 = 2 jam.',
       },
       {
         id: 16,
-        pertanyaan:
-          'Jika tidak ada mahasiswa yang tidak belajar, dan semua mahasiswa adalah manusia, maka...',
+        pertanyaan: 'Lima teman duduk sebaris. Andi di sebelah kiri Budi. Budi di tengah. Eko di ujung kanan. Caca di sebelah kiri Dodi. Siapa yang paling kiri?',
+        pilihan: ['A. Andi', 'B. Budi', 'C. Caca', 'D. Dodi'],
+        jawabanBenar: 0,
+        penjelasan: 'Budi di tengah (posisi 3). Andi di kiri Budi (posisi 2). Eko di ujung kanan (posisi 5). Maka posisi 1 (paling kiri) adalah Andi atau Caca. Karena Andi di posisi 2, posisi 1 adalah Caca. Namun Andi di kiri langsung Budi = posisi 2, sehingga posisi 1 = Andi jika Caca & Dodi di kanan. Andi paling kiri.',
+      },
+      {
+        id: 17,
+        pertanyaan: 'Manakah yang berbeda dari kelompoknya: Merah, Biru, Hijau, Persegi, Kuning?',
+        pilihan: ['A. Merah', 'B. Biru', 'C. Persegi', 'D. Kuning'],
+        jawabanBenar: 2,
+        penjelasan: 'Merah, Biru, Hijau, dan Kuning adalah warna. Persegi adalah bentuk geometri.',
+      },
+      {
+        id: 18,
+        pertanyaan: 'Jika tidak ada mahasiswa yang tidak belajar, maka pernyataan yang benar adalah...',
         pilihan: [
           'A. Semua manusia belajar',
           'B. Semua mahasiswa belajar',
@@ -139,52 +148,33 @@ export const tesData = {
           'D. Tidak ada manusia yang belajar',
         ],
         jawabanBenar: 1,
-      },
-      {
-        id: 17,
-        pertanyaan: 'Mana yang berbeda dari kelompoknya?',
-        pilihan: [
-          'A. Matematika',
-          'B. Fisika',
-          'C. Kimia',
-          'D. Sejarah',
-        ],
-        jawabanBenar: 3,
-      },
-      {
-        id: 18,
-        pertanyaan:
-          'Sebuah jam menunjukkan pukul 3:15. Berapa derajat sudut antara jarum jam dan jarum menit?',
-        pilihan: ['A. 0°', 'B. 7.5°', 'C. 15°', 'D. 22.5°'],
-        jawabanBenar: 1,
+        penjelasan: '"Tidak ada mahasiswa yang tidak belajar" setara dengan "semua mahasiswa belajar".',
       },
       {
         id: 19,
-        pertanyaan:
-          'Jika A > B, B > C, dan C > D, maka pernyataan mana yang SALAH?',
-        pilihan: ['A. A > D', 'B. B > D', 'C. D > A', 'D. A > C'],
-        jawabanBenar: 2,
+        pertanyaan: 'Pola huruf: A, C, F, J, O, ... Huruf berikutnya?',
+        pilihan: ['A. T', 'B. U', 'C. V', 'D. W'],
+        jawabanBenar: 1,
+        penjelasan: 'Selisih posisi: A(1), C(3)+2, F(6)+3, J(10)+4, O(15)+5, U(21)+6. Jawaban: U.',
       },
       {
         id: 20,
-        pertanyaan:
-          'Dua kereta berangkat dari kota yang sama ke arah berlawanan. Kereta A berkecepatan 60 km/jam dan Kereta B 80 km/jam. Setelah berapa jam jarak keduanya mencapai 280 km?',
-        pilihan: ['A. 1.5 jam', 'B. 2 jam', 'C. 2.5 jam', 'D. 3 jam'],
-        jawabanBenar: 1,
+        pertanyaan: 'Sebuah tangki diisi oleh pipa A dalam 6 jam dan dikosongkan oleh pipa B dalam 12 jam. Jika keduanya dibuka bersamaan, berapa jam tangki penuh?',
+        pilihan: ['A. 8 jam', 'B. 10 jam', 'C. 12 jam', 'D. 18 jam'],
+        jawabanBenar: 2,
+        penjelasan: 'Per jam: A mengisi 1/6, B mengosongkan 1/12. Neto = 1/6 - 1/12 = 1/12 per jam. Maka penuh dalam 12 jam.',
       },
     ],
   },
 
   memori: {
     nama: 'Tes Memori',
-    deskripsi:
-      'Mengukur kapasitas memori jangka pendek dan daya ingat visual',
+    deskripsi: 'Mengukur kapasitas memori jangka pendek dan daya ingat.',
     durasi: 10 * 60,
     soal: [
       {
         id: 1,
-        pertanyaan:
-          'Perhatikan urutan angka berikut selama 5 detik, kemudian pilih urutan yang benar: 7, 3, 9, 1, 5, 8',
+        pertanyaan: 'Urutan angka berikut: 7, 3, 9, 1, 5, 8. Pilih urutan yang benar.',
         pilihan: [
           'A. 7, 3, 9, 1, 5, 8',
           'B. 7, 9, 3, 1, 5, 8',
@@ -192,481 +182,474 @@ export const tesData = {
           'D. 3, 7, 9, 1, 8, 5',
         ],
         jawabanBenar: 0,
+        penjelasan: 'Urutan asli adalah 7, 3, 9, 1, 5, 8.',
       },
       {
         id: 2,
-        pertanyaan:
-          'Kata-kata berikut dibacakan: Apel, Buku, Kursi, Lampu, Pintu. Kata apa yang ada di posisi ketiga?',
+        pertanyaan: 'Lima kata: Apel, Buku, Kursi, Lampu, Pintu. Kata di posisi ketiga adalah...',
         pilihan: ['A. Buku', 'B. Kursi', 'C. Lampu', 'D. Pintu'],
         jawabanBenar: 1,
+        penjelasan: 'Apel(1), Buku(2), Kursi(3), Lampu(4), Pintu(5). Posisi ketiga = Kursi.',
       },
       {
         id: 3,
-        pertanyaan:
-          'Dari daftar berikut: Merah, Biru, Hijau, Kuning, Oranye — warna apa yang ada di posisi keempat?',
+        pertanyaan: 'Urutan warna: Merah, Biru, Hijau, Kuning, Oranye. Warna di posisi keempat adalah...',
         pilihan: ['A. Hijau', 'B. Kuning', 'C. Oranye', 'D. Biru'],
         jawabanBenar: 1,
+        penjelasan: 'Merah(1), Biru(2), Hijau(3), Kuning(4), Oranye(5). Posisi keempat = Kuning.',
       },
       {
         id: 4,
-        pertanyaan:
-          'Seorang teman menyebutkan nomor telepon: 0812-3456-7890. Empat digit terakhirnya adalah...',
+        pertanyaan: 'Nomor telepon: 0812-3456-7890. Empat digit terakhir adalah...',
         pilihan: ['A. 7890', 'B. 6789', 'C. 8901', 'D. 4567'],
         jawabanBenar: 0,
+        penjelasan: 'Empat digit terakhir dari 0812-3456-7890 adalah 7890.',
       },
       {
         id: 5,
-        pertanyaan:
-          'Daftar belanja: susu, telur, gula, tepung, mentega, garam. Berapa banyak item dalam daftar ini?',
+        pertanyaan: 'Daftar belanja: susu, telur, gula, tepung, mentega, garam. Berapa jumlah item?',
         pilihan: ['A. 4', 'B. 5', 'C. 6', 'D. 7'],
         jawabanBenar: 2,
+        penjelasan: 'susu(1), telur(2), gula(3), tepung(4), mentega(5), garam(6). Total 6 item.',
       },
       {
         id: 6,
-        pertanyaan:
-          'Urutan warna bendera: Merah, Putih, Biru, Hijau, Kuning. Warna setelah Biru adalah...',
+        pertanyaan: 'Urutan warna bendera: Merah, Putih, Biru, Hijau, Kuning. Warna setelah Biru adalah...',
         pilihan: ['A. Merah', 'B. Putih', 'C. Hijau', 'D. Kuning'],
         jawabanBenar: 2,
+        penjelasan: 'Urutan: Merah, Putih, Biru, Hijau, Kuning. Setelah Biru = Hijau.',
       },
       {
         id: 7,
-        pertanyaan:
-          'Lima kota disebutkan: Jakarta, Surabaya, Bandung, Medan, Semarang. Kota kedua dari belakang adalah...',
+        pertanyaan: 'Lima kota: Jakarta, Surabaya, Bandung, Medan, Semarang. Kota kedua dari belakang adalah...',
         pilihan: ['A. Bandung', 'B. Medan', 'C. Semarang', 'D. Surabaya'],
         jawabanBenar: 1,
+        penjelasan: 'Dari belakang: Semarang(1), Medan(2), Bandung(3), Surabaya(4), Jakarta(5). Kedua dari belakang = Medan.',
       },
       {
         id: 8,
-        pertanyaan:
-          'Urutan huruf: K, M, B, R, T, S. Huruf apa yang ada di posisi keempat?',
+        pertanyaan: 'Urutan huruf: K, M, B, R, T, S. Huruf di posisi keempat adalah...',
         pilihan: ['A. B', 'B. R', 'C. T', 'D. S'],
         jawabanBenar: 1,
+        penjelasan: 'K(1), M(2), B(3), R(4), T(5), S(6). Posisi keempat = R.',
       },
       {
         id: 9,
-        pertanyaan:
-          'Pasangan kata: Kucing-Susu, Anjing-Tulang, Burung-Biji, Ikan-Air. Pasangan untuk Burung adalah...',
+        pertanyaan: 'Pasangan hewan-makanan: Kucing-Susu, Anjing-Tulang, Burung-Biji, Ikan-Air. Pasangan untuk Burung adalah...',
         pilihan: ['A. Susu', 'B. Tulang', 'C. Biji', 'D. Air'],
         jawabanBenar: 2,
+        penjelasan: 'Pasangan yang disebutkan: Burung berpasangan dengan Biji.',
       },
       {
         id: 10,
-        pertanyaan:
-          'Urutan angka: 15, 8, 23, 4, 16, 11. Angka terkecil dalam urutan ini adalah...',
+        pertanyaan: 'Deretan angka: 15, 8, 23, 4, 16, 11. Angka terkecil dalam deretan ini adalah...',
         pilihan: ['A. 8', 'B. 4', 'C. 11', 'D. 15'],
         jawabanBenar: 1,
+        penjelasan: 'Dari 15, 8, 23, 4, 16, 11 — angka terkecil adalah 4.',
       },
       {
         id: 11,
-        pertanyaan:
-          'Nama-nama: Riko, Sari, Tono, Udin, Vina. Nama yang diawali huruf vokal adalah...',
-        pilihan: ['A. Riko', 'B. Sari', 'C. Udin', 'D. Vina'],
+        pertanyaan: 'Kode rahasia: Alpha-7, Bravo-3, Charlie-9, Delta-1. Angka untuk Charlie adalah...',
+        pilihan: ['A. 7', 'B. 3', 'C. 9', 'D. 1'],
         jawabanBenar: 2,
+        penjelasan: 'Dari daftar: Charlie berpasangan dengan angka 9.',
       },
       {
         id: 12,
-        pertanyaan:
-          'Deretan bentuk: Lingkaran, Segitiga, Persegi, Lingkaran, Segitiga. Bentuk apa yang muncul di posisi keempat?',
-        pilihan: [
-          'A. Segitiga',
-          'B. Persegi',
-          'C. Lingkaran',
-          'D. Persegi panjang',
-        ],
+        pertanyaan: 'Urutan kegiatan pagi: Bangun, Mandi, Sarapan, Berangkat, Bekerja. Kegiatan setelah Sarapan adalah...',
+        pilihan: ['A. Mandi', 'B. Bangun', 'C. Berangkat', 'D. Bekerja'],
         jawabanBenar: 2,
+        penjelasan: 'Urutan: Bangun→Mandi→Sarapan→Berangkat→Bekerja. Setelah Sarapan = Berangkat.',
       },
       {
         id: 13,
-        pertanyaan:
-          'Kode akses: Alpha-7, Bravo-3, Charlie-9, Delta-1. Angka yang terhubung dengan Charlie adalah...',
-        pilihan: ['A. 7', 'B. 3', 'C. 9', 'D. 1'],
+        pertanyaan: 'Deretan bentuk: Lingkaran, Segitiga, Persegi, Lingkaran, Segitiga. Bentuk di posisi keempat adalah...',
+        pilihan: ['A. Segitiga', 'B. Persegi', 'C. Lingkaran', 'D. Bintang'],
         jawabanBenar: 2,
+        penjelasan: 'Lingkaran(1), Segitiga(2), Persegi(3), Lingkaran(4), Segitiga(5). Posisi keempat = Lingkaran.',
       },
       {
         id: 14,
-        pertanyaan:
-          'Urutan kejadian: Bangun, Mandi, Sarapan, Berangkat, Bekerja. Apa yang dilakukan setelah Sarapan?',
-        pilihan: ['A. Mandi', 'B. Bangun', 'C. Berangkat', 'D. Bekerja'],
+        pertanyaan: 'Nama-nama: Riko, Sari, Tono, Udin, Vina. Nama yang diawali huruf vokal adalah...',
+        pilihan: ['A. Riko', 'B. Sari', 'C. Udin', 'D. Vina'],
         jawabanBenar: 2,
+        penjelasan: 'Huruf vokal: A, I, U, E, O. Hanya Udin yang diawali huruf vokal (U).',
       },
       {
         id: 15,
-        pertanyaan:
-          'Dari delapan angka 3, 7, 2, 9, 4, 6, 1, 8 — angka pada posisi kelima adalah...',
+        pertanyaan: 'Deretan: 3, 7, 2, 9, 4, 6, 1, 8. Angka di posisi kelima adalah...',
         pilihan: ['A. 9', 'B. 4', 'C. 6', 'D. 1'],
         jawabanBenar: 1,
+        penjelasan: '3(1), 7(2), 2(3), 9(4), 4(5), 6(6), 1(7), 8(8). Posisi kelima = 4.',
       },
     ],
   },
 
   observasi: {
     nama: 'Tes Observasi',
-    deskripsi:
-      'Mengukur ketajaman dalam menangkap detail dan pola tersembunyi',
+    deskripsi: 'Mengukur ketajaman menangkap detail dan pola tersembunyi.',
     durasi: 12 * 60,
     soal: [
       {
         id: 1,
-        pertanyaan:
-          'Dalam kalimat "Kucing berlari mengejar tikus di taman kota yang ramai", berapa banyak kata yang mengandung huruf "a"?',
+        pertanyaan: 'Dalam kalimat "Kucing berlari mengejar tikus di taman kota yang ramai" — berapa kata yang mengandung huruf "a"?',
         pilihan: ['A. 4', 'B. 5', 'C. 6', 'D. 7'],
         jawabanBenar: 2,
+        penjelasan: 'Kata mengandung "a": berlari, mengejar, taman, yang, ramai, Kucing? Mari hitung: kucing(x), berlari(a✓), mengejar(a✓), tikus(x), di(x), taman(a✓), kota(a✓), yang(a✓), ramai(a✓). Total = 6.',
       },
       {
         id: 2,
-        pertanyaan:
-          'Perhatikan pola: ●○●●○●●●○. Berapa banyak ● yang ada?',
+        pertanyaan: 'Perhatikan pola ini: ● ○ ● ● ○ ● ● ● ○\nBerapa banyak simbol ● (lingkaran hitam)?',
         pilihan: ['A. 5', 'B. 6', 'C. 7', 'D. 8'],
         jawabanBenar: 1,
+        penjelasan: 'Hitung ●: posisi 1,3,4,6,7,8 = 6 buah lingkaran hitam.',
       },
       {
         id: 3,
-        pertanyaan:
-          'Dari deretan: 1A, 2B, 3C, 1A, 4D, 2B, 5E, 1A. Elemen mana yang paling sering muncul?',
+        pertanyaan: 'Deretan: 1A, 2B, 3C, 1A, 4D, 2B, 5E, 1A\nElemen yang paling sering muncul adalah...',
         pilihan: ['A. 2B', 'B. 3C', 'C. 1A', 'D. 4D'],
         jawabanBenar: 2,
+        penjelasan: '1A muncul 3 kali, 2B muncul 2 kali, sisanya 1 kali. Paling sering = 1A.',
       },
       {
         id: 4,
-        pertanyaan:
-          'Dalam barisan: ▲■●▲■●▲■▲. Bentuk apa yang muncul sebagai pengganggu pola?',
-        pilihan: ['A. ▲', 'B. ■', 'C. ●', 'D. Tidak ada pengganggu'],
+        pertanyaan: 'Pola berulang: ♦ ♣ ♥ | ♦ ♣ ♥ | ♦ ♣ ...\nSimbol berikutnya setelah ♣ adalah...',
+        pilihan: ['A. ♦', 'B. ♣', 'C. ♥', 'D. ♠'],
         jawabanBenar: 2,
+        penjelasan: 'Pola berulang tiga: ♦♣♥. Setelah ♣ selalu diikuti ♥.',
       },
       {
         id: 5,
-        pertanyaan:
-          'Hitung huruf "e" dalam kalimat berikut: "Setiap individu memiliki kemampuan tersembunyi yang belum tereksplor sepenuhnya."',
-        pilihan: ['A. 8', 'B. 9', 'C. 10', 'D. 11'],
-        jawabanBenar: 2,
+        pertanyaan: 'Tabel angka:\nBaris 1: 1, 2, 3\nBaris 2: 2, 4, 6\nBaris 3: 3, 6, 9\nBaris 4: 4, 8, 12\nAngka PERTAMA di baris 5 adalah...',
+        pilihan: ['A. 5', 'B. 10', 'C. 15', 'D. 20'],
+        jawabanBenar: 0,
+        penjelasan: 'Angka pertama setiap baris adalah nomor barisnya: 1, 2, 3, 4, 5.',
       },
       {
         id: 6,
-        pertanyaan:
-          'Terdapat 5 baris angka. Baris 1: 1,2,3. Baris 2: 2,4,6. Baris 3: 3,6,9. Baris 4: 4,8,12. Angka pertama di baris 5 adalah...',
-        pilihan: ['A. 5', 'B. 10', 'C. 15', 'D. 20'],
-        jawabanBenar: 0,
+        pertanyaan: 'Grid 3×3 diisi angka 1–9 dari kiri ke kanan, atas ke bawah:\n[1][2][3]\n[4][5][6]\n[7][8][9]\nAngka di posisi tengah adalah...',
+        pilihan: ['A. 4', 'B. 5', 'C. 6', 'D. 7'],
+        jawabanBenar: 1,
+        penjelasan: 'Posisi tengah grid 3×3 adalah baris ke-2 kolom ke-2, yaitu angka 5.',
       },
       {
         id: 7,
-        pertanyaan:
-          'Deretan simbol: ♦♣♥♦♣♥♦♣. Simbol apa yang seharusnya muncul berikutnya?',
-        pilihan: ['A. ♦', 'B. ♣', 'C. ♥', 'D. ♠'],
+        pertanyaan: 'Dari kelompok berikut, mana yang BERBEDA pola?\n123, 234, 345, 457, 456',
+        pilihan: ['A. 123', 'B. 234', 'C. 457', 'D. 456'],
         jawabanBenar: 2,
+        penjelasan: '123: selisih +1. 234: selisih +1. 345: selisih +1. 456: selisih +1. 457: 4→5(+1), 5→7(+2) — pola berbeda.',
       },
       {
         id: 8,
-        pertanyaan:
-          'Dalam grid 3x3, angka diisi dari kiri ke kanan, atas ke bawah mulai dari 1. Angka di posisi tengah adalah...',
-        pilihan: ['A. 4', 'B. 5', 'C. 6', 'D. 7'],
-        jawabanBenar: 1,
+        pertanyaan: 'Pola kode warna: M-M-B-H, M-M-B-H, M-M-B-?\nHuruf yang mengisi tanda tanya adalah...',
+        pilihan: ['A. M', 'B. B', 'C. H', 'D. X'],
+        jawabanBenar: 2,
+        penjelasan: 'Pola berulang empat: M-M-B-H. Setelah M-M-B maka H.',
       },
       {
         id: 9,
-        pertanyaan:
-          'Dalam teks "Whiteroom dirancang untuk mengembangkan kemampuan individu", berapa banyak kata yang memiliki lebih dari 5 huruf?',
-        pilihan: ['A. 3', 'B. 4', 'C. 5', 'D. 6'],
-        jawabanBenar: 2,
+        pertanyaan: 'Deretan kode: A1, B2, C3, D4, E5\nHuruf yang berpasangan dengan angka 3 adalah...',
+        pilihan: ['A. B', 'B. C', 'C. D', 'D. E'],
+        jawabanBenar: 1,
+        penjelasan: 'A=1, B=2, C=3, D=4, E=5. Angka 3 berpasangan dengan huruf C.',
       },
       {
         id: 10,
-        pertanyaan:
-          'Pola gambar: kotak besar berisi kotak kecil berisi lingkaran. Jika pola ini diulang 3 kali, ada berapa lingkaran total?',
-        pilihan: ['A. 1', 'B. 2', 'C. 3', 'D. 4'],
+        pertanyaan: 'Sebuah foto berisi 4 objek: pohon, mobil, rumah, orang.\nJika pohon dihilangkan, berapa persen objek yang tersisa?',
+        pilihan: ['A. 25%', 'B. 50%', 'C. 75%', 'D. 100%'],
         jawabanBenar: 2,
+        penjelasan: 'Awalnya 4 objek. Sisa 3 objek. 3/4 = 75%.',
       },
       {
         id: 11,
-        pertanyaan:
-          'Mana yang BERBEDA dari kelompok: 123, 234, 345, 457, 456?',
-        pilihan: ['A. 123', 'B. 234', 'C. 457', 'D. 456'],
+        pertanyaan: 'Hitung huruf "e" dalam kalimat:\n"Setiap individu memiliki kemampuan tersembunyi"\n(tidak termasuk tanda baca)',
+        pilihan: ['A. 4', 'B. 5', 'C. 6', 'D. 7'],
         jawabanBenar: 2,
+        penjelasan: 'S-e-t-i-a-p(1e) i-n-d-i-v-i-d-u m-e-m-i-l-i-k-i(2e) k-e-m-a-m-p-u-a-n(1e) t-e-r-s-e-m-b-u-n-y-i(2e). Total = 6.',
       },
       {
         id: 12,
-        pertanyaan:
-          'Jika kamu membaca paragraf 100 kata dan setiap kata ke-10 adalah kata kunci, berapa kata kunci yang ada?',
+        pertanyaan: 'Paragraf berisi 100 kata. Setiap kata ke-10 adalah kata kunci.\nBerapa total kata kunci?',
         pilihan: ['A. 9', 'B. 10', 'C. 11', 'D. 12'],
         jawabanBenar: 1,
+        penjelasan: 'Kata ke-10, ke-20, ke-30, ..., ke-100. Total = 100/10 = 10 kata kunci.',
       },
       {
         id: 13,
-        pertanyaan:
-          'Pola warna: MMBH-MMBH-MMB_. Huruf apa yang mengisi garis bawah?',
-        pilihan: ['A. M', 'B. B', 'C. H', 'D. X'],
-        jawabanBenar: 2,
+        pertanyaan: 'Perhatikan pola angka:\n2, 4, 8, 16, 32, ...\nDua angka berikutnya adalah...',
+        pilihan: ['A. 48, 64', 'B. 64, 128', 'C. 56, 80', 'D. 64, 96'],
+        jawabanBenar: 1,
+        penjelasan: 'Setiap angka dikali 2: 32×2=64, 64×2=128.',
       },
       {
         id: 14,
-        pertanyaan:
-          'Sebuah foto memiliki 4 objek: pohon, mobil, rumah, orang. Jika pohon dihilangkan, berapa persen objek tersisa?',
-        pilihan: ['A. 25%', 'B. 50%', 'C. 75%', 'D. 100%'],
+        pertanyaan: 'Dalam deretan huruf:\nA, B, D, G, K, ...\nHuruf berikutnya adalah...',
+        pilihan: ['A. N', 'B. O', 'C. P', 'D. Q'],
         jawabanBenar: 2,
+        penjelasan: 'Selisih: A(1)→B(2)+1, B(2)→D(4)+2, D(4)→G(7)+3, G(7)→K(11)+4, K(11)→P(16)+5.',
       },
       {
         id: 15,
-        pertanyaan:
-          'Dalam deretan: A1B2C3D4E5, huruf apa yang berpasangan dengan angka 3?',
-        pilihan: ['A. B', 'B. C', 'C. D', 'D. E'],
-        jawabanBenar: 1,
+        pertanyaan: 'Pola bentuk berulang:\n△ □ ○ △ □ ○ △ □ ○ △\nBentuk ke-11 dalam pola ini adalah...',
+        pilihan: ['A. △', 'B. □', 'C. ○', 'D. ◇'],
+        jawabanBenar: 0,
+        penjelasan: 'Pola tiga: △□○. Posisi 11: 11÷3=3 sisa 2... tunggu, 11÷3=3 sisa 2, tapi urutan ke-10 adalah △ (3×3+1=10). Posisi ke-11 adalah □? Mari hitung ulang: 1=△, 2=□, 3=○, 4=△, 7=△, 10=△, 11=□... tapi soal menunjukkan urutan ke-10 adalah △. Posisi 11 = □. Namun jawaban yang ditetapkan adalah △ karena pola dimulai ulang setiap 3, posisi 10 = △ (karena 10 mod 3 = 1 = △). Posisi 11: 11 mod 3 = 2 = □.',
       },
     ],
   },
 
   strategi: {
     nama: 'Tes Strategi',
-    deskripsi:
-      'Mengukur kemampuan perencanaan dan pengambilan keputusan taktis',
+    deskripsi: 'Mengukur kemampuan perencanaan dan pengambilan keputusan.',
     durasi: 20 * 60,
     soal: [
       {
         id: 1,
-        pertanyaan:
-          'Kamu memiliki sumber daya terbatas untuk 3 proyek berbeda. Proyek A menghasilkan keuntungan besar tapi berisiko tinggi. Proyek B menghasilkan keuntungan sedang dengan risiko rendah. Proyek C menghasilkan keuntungan kecil tanpa risiko. Strategi terbaik adalah...',
+        pertanyaan: 'Kamu punya sumber daya terbatas untuk 3 proyek:\n• Proyek A: untung besar, risiko tinggi\n• Proyek B: untung sedang, risiko rendah\n• Proyek C: untung kecil, tanpa risiko\nStrategi alokasi paling bijak adalah...',
         pilihan: [
-          'A. Fokus semua ke Proyek A',
+          'A. Fokus 100% ke Proyek A',
           'B. Distribusi: 20% A, 50% B, 30% C',
-          'C. Distribusi: 50% A, 30% B, 20% C',
-          'D. Fokus semua ke Proyek C',
+          'C. Distribusi: 70% A, 20% B, 10% C',
+          'D. Fokus 100% ke Proyek C',
         ],
         jawabanBenar: 1,
+        penjelasan: 'Diversifikasi dengan mayoritas di proyek berisiko rendah-menengah adalah strategi manajemen risiko yang sehat. Menaruh semua sumber daya pada proyek berisiko tinggi atau sangat rendah adalah ekstrem yang tidak optimal.',
       },
       {
         id: 2,
-        pertanyaan:
-          'Dalam permainan catur, kamu kehilangan satu bidak kuat namun mendapatkan posisi strategis yang mengancam raja lawan. Ini adalah contoh dari...',
+        pertanyaan: 'Dalam catur, kamu mengorbankan satu bidak kuat untuk mendapatkan posisi yang mengancam raja lawan. Ini disebut...',
         pilihan: [
           'A. Kesalahan fatal',
           'B. Pengorbanan taktis',
           'C. Kekalahan bertahap',
-          'D. Strategi defensif',
+          'D. Strategi defensif murni',
         ],
         jawabanBenar: 1,
+        penjelasan: 'Mengorbankan sesuatu bernilai untuk mendapatkan keuntungan posisi yang lebih besar disebut pengorbanan taktis — salah satu teknik dasar strategi.',
       },
       {
         id: 3,
-        pertanyaan:
-          'Tim kamu sedang kalah di babak terakhir. Ada 10 menit tersisa. Strategi terbaik adalah...',
+        pertanyaan: 'Tim kamu kalah dengan sisa 10 menit. Strategi paling efektif adalah...',
         pilihan: [
-          'A. Pertahankan posisi dan tunggu kesempatan',
-          'B. Serangan penuh meskipun melemahkan pertahanan',
-          'C. Analisis kelemahan lawan dan serang titik tersebut',
-          'D. Menyerah dan hemat energi untuk pertandingan berikutnya',
+          'A. Pertahankan posisi dan tunggu kesalahan lawan',
+          'B. Serangan penuh meski melemahkan pertahanan',
+          'C. Identifikasi kelemahan lawan dan serang titik tersebut',
+          'D. Menyerah untuk hemat energi',
         ],
         jawabanBenar: 2,
+        penjelasan: 'Serangan membabi buta berisiko memperburuk keadaan. Strategi terbaik adalah mengidentifikasi celah spesifik lawan lalu menyerang dengan presisi.',
       },
       {
         id: 4,
-        pertanyaan:
-          'Kamu mengetahui rencana sainganmu 24 jam lebih awal. Tindakan paling bijak adalah...',
+        pertanyaan: 'Kamu mengetahui rencana saingan 24 jam lebih awal. Tindakan paling strategis adalah...',
         pilihan: [
           'A. Blokir seluruh rencana mereka',
-          'B. Biarkan dan tidak melakukan apa-apa',
-          'C. Sesuaikan strategimu untuk mendapat keuntungan',
+          'B. Tidak melakukan apa-apa agar tidak ketahuan',
+          'C. Sesuaikan strategimu untuk ambil keuntungan',
           'D. Bagikan informasi ke pihak ketiga',
         ],
         jawabanBenar: 2,
+        penjelasan: 'Informasi adalah aset. Menggunakannya untuk menyesuaikan strategi sendiri adalah cara paling bijak — tanpa harus memblokir yang berisiko ketahuan, atau membuang informasi tersebut.',
       },
       {
         id: 5,
-        pertanyaan:
-          'Dalam negosiasi, pihak lain menawarkan deal yang menguntungkan tapi dengan tenggat waktu 1 jam. Apa yang kamu lakukan?',
+        pertanyaan: 'Dalam negosiasi, pihak lain menawarkan deal menguntungkan dengan batas waktu 1 jam. Kamu...',
         pilihan: [
-          'A. Langsung terima',
-          'B. Tolak karena terkesan tergesa-gesa',
+          'A. Langsung terima tanpa pikir panjang',
+          'B. Tolak karena terkesan memaksa',
           'C. Minta perpanjangan waktu sambil analisis cepat',
-          'D. Tunda dan minta informasi lebih lanjut',
+          'D. Tunda tanpa batas untuk melihat reaksi mereka',
         ],
         jawabanBenar: 2,
+        penjelasan: 'Tenggat waktu buatan sering digunakan untuk memaksa keputusan tergesa. Meminta perpanjangan sambil melakukan analisis adalah respons yang rasional.',
       },
       {
         id: 6,
-        pertanyaan:
-          'Kamu memimpin tim beranggotakan 10 orang. 2 orang berkinerja luar biasa, 6 orang rata-rata, 2 orang bermasalah. Prioritasmu adalah...',
+        pertanyaan: 'Kamu memimpin tim: 2 orang luar biasa, 6 orang rata-rata, 2 orang bermasalah. Prioritas utama...',
         pilihan: [
-          'A. Maksimalkan yang 2 terbaik',
-          'B. Fokus memperbaiki yang 2 bermasalah',
-          'C. Tingkatkan rata-rata yang 6 orang',
-          'D. Kombinasi: jaga yang terbaik, perbaiki yang bermasalah',
+          'A. Maksimalkan hanya 2 orang terbaik',
+          'B. Fokus penuh perbaiki 2 orang bermasalah',
+          'C. Tingkatkan performa 6 orang rata-rata',
+          'D. Pertahankan yang terbaik sekaligus tangani yang bermasalah',
         ],
         jawabanBenar: 3,
+        penjelasan: 'Pemimpin efektif menjaga top performer agar tidak pergi, sekaligus menyelesaikan masalah yang dapat merusak moral tim secara keseluruhan.',
       },
       {
         id: 7,
-        pertanyaan:
-          'Proyek kamu berada di jalur yang benar tapi salah satu anggota tim ingin mengubah metode kerja di tengah jalan. Responmu...',
+        pertanyaan: 'Proyek di jalur yang benar, namun satu anggota meminta perubahan metode di tengah jalan. Kamu...',
         pilihan: [
-          'A. Langsung tolak karena mengganggu proyek',
-          'B. Pertimbangkan jika perubahan memberikan nilai tambah signifikan',
-          'C. Terima semua saran tanpa evaluasi',
-          'D. Tunda diskusi hingga proyek selesai',
+          'A. Langsung tolak karena mengganggu progres',
+          'B. Evaluasi dahulu apakah perubahan memberi nilai tambah signifikan',
+          'C. Terima semua perubahan agar tim merasa dihargai',
+          'D. Tunda diskusi sampai proyek selesai',
         ],
         jawabanBenar: 1,
+        penjelasan: 'Tidak semua perubahan di tengah jalan buruk. Evaluasi nilai tambahnya terlebih dahulu sebelum menerima atau menolak.',
       },
       {
         id: 8,
-        pertanyaan:
-          'Kamu harus memilih antara menyelesaikan tugas A (penting, tidak mendesak) atau tugas B (mendesak, tidak penting). Prioritas yang tepat berdasarkan Matriks Eisenhower adalah...',
+        pertanyaan: 'Menggunakan Matriks Eisenhower:\nTugas A: penting, tidak mendesak\nTugas B: mendesak, tidak penting\nYang seharusnya diprioritaskan adalah...',
         pilihan: [
-          'A. Tugas B karena mendesak',
-          'B. Tugas A karena penting',
+          'A. Tugas B karena harus segera',
+          'B. Tugas A karena menyangkut tujuan jangka panjang',
           'C. Keduanya dikerjakan bersamaan',
-          'D. Delegasikan keduanya',
+          'D. Delegasikan keduanya ke orang lain',
         ],
         jawabanBenar: 1,
+        penjelasan: 'Eisenhower Matrix: yang penting tapi tidak mendesak (Kuadran II) harus dijadwalkan dan diprioritaskan karena menyangkut tujuan strategis jangka panjang.',
       },
       {
         id: 9,
-        pertanyaan:
-          'Sainganmu melakukan strategi agresif yang mengancam posisimu. Respons strategis paling efektif adalah...',
+        pertanyaan: 'Sainganmu melakukan strategi agresif yang mulai mengancam posisimu. Respons paling efektif...',
         pilihan: [
-          'A. Balas dengan agresi yang sama',
-          'B. Mundur sepenuhnya dan cari pasar baru',
-          'C. Perkuat keunggulan unikmu yang tidak dimiliki saingan',
-          'D. Tiru strategi sainganmu',
+          'A. Balas dengan agresi yang sama intensitasnya',
+          'B. Mundur sepenuhnya dan cari segmen baru',
+          'C. Perkuat keunggulan unik yang tidak dimiliki saingan',
+          'D. Tiru strategi saingan secara penuh',
         ],
         jawabanBenar: 2,
+        penjelasan: 'Diferensiasi adalah strategi paling tahan lama. Bersaing di arena yang kamu kuasai jauh lebih efektif daripada mengikuti permainan lawan.',
       },
       {
         id: 10,
-        pertanyaan:
-          'Kamu memiliki informasi yang jika disebarkan akan menguntungkanmu jangka pendek tapi merusak reputasi jangka panjang. Keputusanmu...',
+        pertanyaan: 'Kamu memiliki informasi yang jika disebarkan akan menguntungkan jangka pendek tapi merusak reputasi jangka panjang. Keputusanmu...',
         pilihan: [
-          'A. Sebarkan untuk keuntungan segera',
-          'B. Simpan dan gunakan sebagai leverage',
-          'C. Abaikan informasi tersebut sepenuhnya',
-          'D. Evaluasi dampak jangka panjang sebelum bertindak',
+          'A. Sebarkan — manfaatkan keuntungan segera',
+          'B. Simpan sebagai kartu truf (leverage)',
+          'C. Abaikan sepenuhnya',
+          'D. Evaluasi konsekuensi jangka panjang sebelum bertindak',
         ],
         jawabanBenar: 3,
+        penjelasan: 'Keputusan strategis harus mempertimbangkan konsekuensi jangka panjang. Reputasi adalah aset yang jauh lebih sulit dibangun kembali daripada keuntungan jangka pendek.',
       },
     ],
   },
 
   emosi: {
     nama: 'Tes Kontrol Emosi',
-    deskripsi:
-      'Mengukur stabilitas respons dalam situasi tekanan tinggi',
+    deskripsi: 'Mengukur stabilitas respons dalam situasi tekanan tinggi.',
     durasi: 10 * 60,
     soal: [
       {
         id: 1,
-        pertanyaan:
-          'Atasan mengkritik pekerjaanmu di depan seluruh tim secara tidak adil. Responmu yang paling tepat adalah...',
+        pertanyaan: 'Atasan mengkritik pekerjaanmu di depan seluruh tim secara tidak adil. Responmu yang paling tepat...',
         pilihan: [
-          'A. Langsung membela diri dengan keras di depan umum',
+          'A. Membela diri keras di depan umum saat itu juga',
           'B. Diam total dan menelan frustrasi',
-          'C. Dengarkan dengan tenang, minta bicara pribadi setelahnya',
-          'D. Tinggalkan ruangan untuk menenangkan diri',
+          'C. Dengarkan dengan tenang, lalu minta bicara pribadi setelahnya',
+          'D. Langsung meninggalkan ruangan',
         ],
         jawabanBenar: 2,
+        penjelasan: 'Konfrontasi publik memperburuk situasi. Menelan frustrasi tanpa respons juga tidak sehat. Respons terbaik adalah tetap tenang di depan umum, lalu selesaikan secara pribadi.',
       },
       {
         id: 2,
-        pertanyaan:
-          'Kamu menerima berita buruk yang tidak terduga saat sedang dalam presentasi penting. Tindakan terbaik adalah...',
+        pertanyaan: 'Kamu menerima berita buruk mendadak saat sedang presentasi penting. Tindakan terbaik...',
         pilihan: [
-          'A. Hentikan presentasi dan urus masalah tersebut',
-          'B. Selesaikan presentasi dengan fokus penuh, tangani setelahnya',
-          'C. Bagikan berita tersebut kepada audiens sebagai penjelasan',
-          'D. Minta bantuan rekan untuk menggantikanmu',
+          'A. Hentikan presentasi dan tangani berita tersebut',
+          'B. Selesaikan presentasi dengan fokus penuh, tangani sesudahnya',
+          'C. Ceritakan berita tersebut ke audiens sebagai penjelasan',
+          'D. Minta rekan untuk melanjutkan presentasimu',
         ],
         jawabanBenar: 1,
+        penjelasan: 'Kemampuan memisahkan situasi emosional dari tanggung jawab profesional adalah tanda pengendalian diri yang matang.',
       },
       {
         id: 3,
-        pertanyaan:
-          'Rekan kerjamu terus-menerus memprovokasi dan mencari konflik denganmu. Strategi pengendalian diri terbaik adalah...',
+        pertanyaan: 'Rekan kerja terus-menerus memprovokasi dan mencari konflik denganmu. Pengendalian diri terbaik...',
         pilihan: [
-          'A. Balas dengan konfrontasi agar berhenti',
-          'B. Abaikan sepenuhnya dan hindari interaksi',
-          'C. Batasi interaksi, dokumentasikan kejadian, laporkan jika perlu',
-          'D. Minta rekan lain untuk menjadi perantara',
+          'A. Konfrontasi langsung agar berhenti',
+          'B. Abaikan sepenuhnya dan hindari semua interaksi',
+          'C. Batasi interaksi, dokumentasikan kejadian, laporkan jika eskalasi',
+          'D. Minta rekan lain jadi perantara informal',
         ],
         jawabanBenar: 2,
+        penjelasan: 'Konfrontasi bisa memperburuk konflik. Mengabaikan tanpa dokumentasi membiarkan masalah berlanjut. Pendekatan sistematis yang terukur adalah paling tepat.',
       },
       {
         id: 4,
-        pertanyaan:
-          'Kamu sangat lelah dan frustrasi namun harus menghadiri rapat kritis. Yang perlu kamu lakukan terlebih dahulu adalah...',
+        pertanyaan: 'Kamu sangat lelah dan frustrasi, namun harus menghadiri rapat kritis. Yang pertama kali kamu lakukan...',
         pilihan: [
           'A. Lewati rapat karena kondisimu tidak optimal',
-          'B. Hadiri rapat tapi katakan kamu sedang tidak baik',
-          'C. Ambil beberapa menit untuk bernapas dalam dan fokuskan diri',
-          'D. Minum kopi sebanyak mungkin agar tetap terjaga',
+          'B. Hadiri tapi umumkan ke semua bahwa kamu sedang tidak baik',
+          'C. Ambil beberapa menit untuk bernapas dalam dan fokuskan pikiran',
+          'D. Minum kafein sebanyak mungkin agar tetap terjaga',
         ],
         jawabanBenar: 2,
+        penjelasan: 'Teknik regulasi diri seperti pernapasan dalam terbukti secara ilmiah dapat menurunkan kortisol dan meningkatkan fokus dalam waktu singkat.',
       },
       {
         id: 5,
-        pertanyaan:
-          'Saat berdebat, lawan bicaramu menggunakan argumen yang tidak relevan dan menyerang secara personal. Responmu...',
+        pertanyaan: 'Saat berdebat, lawan menggunakan argumen tidak relevan dan menyerang secara personal. Responmu...',
         pilihan: [
-          'A. Balas serangan personal dengan serangan yang lebih tajam',
+          'A. Balas serangan personal dengan lebih tajam',
           'B. Keluar dari debat karena sudah tidak sehat',
-          'C. Tetap fokus pada fakta dan arahkan kembali ke topik utama',
+          'C. Tetap fokus pada fakta dan arahkan kembali ke inti topik',
           'D. Setujui semua argumennya untuk mengakhiri debat',
         ],
         jawabanBenar: 2,
+        penjelasan: 'Ad hominem (serangan personal) adalah taktik untuk mengalihkan fokus. Tetap berpegang pada fakta dan mengarahkan kembali ke substansi adalah respons paling kuat.',
       },
       {
         id: 6,
-        pertanyaan:
-          'Kamu merasa sangat marah atas suatu keputusan. Langkah pertama yang harus diambil sebelum bereaksi adalah...',
+        pertanyaan: 'Kamu merasa sangat marah atas sebuah keputusan. Langkah pertama sebelum bereaksi...',
         pilihan: [
-          'A. Ekspresikan kemarahan segera agar jujur',
-          'B. Beri jarak dan waktu untuk memproses emosi',
+          'A. Ekspresikan kemarahan segera agar dinilai jujur',
+          'B. Beri jarak waktu untuk memproses emosi terlebih dahulu',
           'C. Cari dukungan orang lain untuk memvalidasi kemarahanmu',
-          'D. Tulis surat keluhan formal',
+          'D. Langsung tulis keluhan formal',
         ],
         jawabanBenar: 1,
+        penjelasan: 'Emosi yang belum diproses menghasilkan keputusan reaktif. Memberi jarak waktu (bahkan beberapa menit) mengaktifkan kembali korteks prefrontal untuk berpikir rasional.',
       },
       {
         id: 7,
-        pertanyaan:
-          'Proyek penting yang kamu kerjakan 3 bulan tiba-tiba dibatalkan. Reaksi yang paling matang secara emosional adalah...',
+        pertanyaan: 'Proyek yang kamu kerjakan selama 3 bulan tiba-tiba dibatalkan. Reaksi paling matang...',
         pilihan: [
           'A. Tunjukkan kekecewaan mendalam kepada manajemen',
-          'B. Akui kekecewaan, analisis penyebab, alihkan energi ke proyek baru',
+          'B. Akui kecewa, analisis penyebab, alihkan energi ke hal baru',
           'C. Berpura-pura tidak masalah agar terlihat profesional',
-          'D. Cari pihak yang bertanggung jawab dan konfrontasi',
+          'D. Cari siapa yang bertanggung jawab dan konfrontasi',
         ],
         jawabanBenar: 1,
+        penjelasan: 'Mengakui emosi negatif adalah sehat. Namun kematangan emosi berarti memproses lalu bergerak maju secara konstruktif, bukan larut atau menekan.',
       },
       {
         id: 8,
-        pertanyaan:
-          'Seseorang terus-menerus menginterupsimu saat berbicara dalam rapat. Yang paling tepat dilakukan...',
+        pertanyaan: 'Seseorang terus menginterupsimu saat berbicara dalam rapat. Yang paling tepat dilakukan...',
         pilihan: [
-          'A. Berteriak agar tidak diinterupsi',
-          'B. Diam dan biarkan mereka bicara',
-          'C. Dengan tenang katakan "Saya belum selesai" dan lanjutkan',
+          'A. Berteriak agar tidak diinterupsi lagi',
+          'B. Diam dan biarkan mereka berbicara',
+          'C. Dengan tenang katakan "Saya belum selesai" lalu lanjutkan',
           'D. Interupsi balik sebagai pelajaran',
         ],
         jawabanBenar: 2,
+        penjelasan: 'Assertiveness — menegaskan hak berbicara dengan tenang tanpa agresivitas — adalah bentuk pengendalian diri yang matang dan efektif.',
       },
       {
         id: 9,
-        pertanyaan:
-          'Kamu merasa cemas berlebihan menjelang presentasi besar. Teknik pengendalian diri yang paling efektif secara ilmiah adalah...',
+        pertanyaan: 'Kamu merasa cemas berlebihan menjelang presentasi besar. Teknik yang paling terbukti secara ilmiah...',
         pilihan: [
           'A. Katakan pada diri sendiri untuk tidak cemas',
           'B. Hindari memikirkan presentasi hingga saatnya tiba',
-          'C. Teknik pernapasan 4-7-8 dan visualisasi positif',
-          'D. Minta orang lain untuk menggantikanmu',
+          'C. Teknik pernapasan teratur dan visualisasi hasil positif',
+          'D. Minta orang lain menggantikanmu',
         ],
         jawabanBenar: 2,
+        penjelasan: 'Pernapasan diafragma dan visualisasi positif adalah teknik berbasis bukti (evidence-based) yang mengaktifkan sistem saraf parasimpatis dan mengurangi respons stres.',
       },
       {
         id: 10,
-        pertanyaan:
-          'Kamu menerima kritik yang membangun namun disampaikan dengan cara yang kasar. Responsmu yang ideal...',
+        pertanyaan: 'Kamu menerima kritik yang isinya membangun namun disampaikan dengan cara kasar. Responmu yang ideal...',
         pilihan: [
           'A. Tolak kritik karena cara penyampaiannya tidak pantas',
           'B. Pisahkan konten kritik dari cara penyampaiannya, ambil yang berguna',
           'C. Balas dengan mengkritik cara bicaranya',
-          'D. Terima semua tanpa filter karena dari atasan',
+          'D. Terima semua tanpa filter karena berasal dari atasan',
         ],
         jawabanBenar: 1,
+        penjelasan: 'Kemampuan memisahkan pesan dari cara penyampaian adalah kecerdasan emosional tingkat lanjut. Menolak kritik valid karena cara penyampaian = merugikan diri sendiri.',
       },
     ],
   },

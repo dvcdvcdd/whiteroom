@@ -1,15 +1,5 @@
-export default function ProgressBar({
-  value = 0,
-  label = '',
-  showPercent = true,
-  color = 'black',
-  height = 'normal',
-}) {
+export default function ProgressBar({ value = 0, label = '', showPercent = true, height = 'normal' }) {
   const clamped = Math.min(100, Math.max(0, value))
-
-  const barColor =
-    color === 'red' ? 'bg-wr-red' : 'bg-wr-black'
-
   const barHeight = height === 'thin' ? 'h-1' : 'h-2'
 
   return (
@@ -22,15 +12,13 @@ export default function ProgressBar({
             </span>
           )}
           {showPercent && (
-            <span className="text-xs font-mono text-wr-gray">
-              {clamped}
-            </span>
+            <span className="text-xs font-mono text-wr-gray">{clamped}%</span>
           )}
         </div>
       )}
       <div className={`w-full bg-wr-muted ${barHeight}`}>
         <div
-          className={`${barHeight} ${barColor} transition-all duration-500`}
+          className={`${barHeight} bg-wr-black transition-all duration-500`}
           style={{ width: `${clamped}%` }}
         />
       </div>
