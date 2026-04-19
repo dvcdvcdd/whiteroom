@@ -2,7 +2,7 @@
   "name": "whiteroom-beta",
   "private": true,
   "version": "1.0.0",
-  "homepage": "https://[USERNAME].github.io/whiteroom.beta",
+  "homepage": "https://github.com/dvcdvcdd/whiteroom",
   "type": "module",
   "scripts": {
     "dev": "vite",
