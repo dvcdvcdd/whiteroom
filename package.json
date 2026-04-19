@@ -1,8 +1,8 @@
 {
-  "name": "whiteroom",
+  "name": "whiteroom-beta",
   "private": true,
   "version": "1.0.0",
-  "homepage": "https://[USERNAME].github.io/whiteroom",
+  "homepage": "https://[USERNAME].github.io/whiteroom.beta",
   "type": "module",
   "scripts": {
     "dev": "vite",
