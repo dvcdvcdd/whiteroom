@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import ProgressBar from '../components/ui/ProgressBar'
 
+// ─── Utilitas ─────────────────────────────────────────────
 function acakArray(arr) {
   const hasil = [...arr]
   for (let i = hasil.length - 1; i > 0; i--) {
@@ -19,6 +20,29 @@ function acakArray(arr) {
     ;[hasil[i], hasil[j]] = [hasil[j], hasil[i]]
   }
   return hasil
+}
+
+function acakSoalDanPilihan(soalAsli) {
+  const soalTeracak = acakArray(soalAsli)
+
+  return soalTeracak.map((soal) => {
+    // Buat array index: [0, 1, 2, 3]
+    const indexAsli = soal.pilihan.map((_, i) => i)
+    // Acak index
+    const indexAcak = acakArray(indexAsli)
+    // Susun pilihan baru berdasarkan index acak
+    const pilihanBaru = indexAcak.map((i) => soal.pilihan[i])
+    // Cari posisi baru jawaban benar
+    const jawabanBenrBaru = indexAcak.indexOf(soal.jawabanBenar)
+
+    return {
+      ...soal,
+      pilihan: pilihanBaru,
+      jawabanBenar: jawabanBenrBaru,
+      pilihanAsli: soal.pilihan,
+      jawabanBenarAsli: soal.jawabanBenar,
+    }
+  })
 }
 
 function simpanRiwayat(kategori, nama, skor, total, persen) {
@@ -80,7 +104,7 @@ function getLevel(persen) {
   }
 }
 
-// ─── Hasil ────────────────────────────────────────────────
+// ─── Komponen Hasil ───────────────────────────────────────
 function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang }) {
   const persen = Math.round((skor / total) * 100)
   const level = getLevel(persen)
@@ -162,6 +186,7 @@ function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang }) {
                         {item.pertanyaan}
                       </p>
 
+                      {/* Jawaban yang dipilih */}
                       <div className={`text-[10px] md:text-xs px-2 md:px-3 py-1.5 md:py-2 mb-2 font-mono break-words ${
                         benar ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
                       }`}>
@@ -171,13 +196,17 @@ function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang }) {
                         {item.dipilih !== null ? item.pilihan[item.dipilih] : 'Tidak dijawab'}
                       </div>
 
+                      {/* Jawaban benar (tampilkan dari pilihan asli) */}
                       {!benar && (
                         <div className="text-[10px] md:text-xs px-2 md:px-3 py-1.5 md:py-2 mb-2 font-mono bg-green-100 text-green-800 break-words">
                           <span className="font-bold uppercase tracking-widest">Jawaban Benar:</span>{' '}
-                          {item.pilihan[item.jawabanBenar]}
+                          {item.pilihanAsli
+                            ? item.pilihanAsli[item.jawabanBenarAsli]
+                            : item.pilihan[item.jawabanBenar]}
                         </div>
                       )}
 
+                      {/* Penjelasan */}
                       {item.penjelasan && (
                         <div className="text-[10px] md:text-xs px-2 md:px-3 py-1.5 md:py-2 bg-white border border-wr-border text-wr-gray leading-relaxed break-words">
                           <span className="font-bold font-mono uppercase tracking-widest text-wr-black">
@@ -198,7 +227,7 @@ function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang }) {
         <div className="flex flex-col gap-3">
           <button onClick={onUlang} className="btn-outline w-full flex items-center justify-center gap-2 text-xs md:text-sm">
             <RotateCcw size={14} />
-            Coba Lagi (Soal Diacak)
+            Coba Lagi (Soal & Pilihan Diacak)
           </button>
           <Link to="/evaluasi" className="btn-primary w-full text-center text-xs md:text-sm">
             Pilih Tes Lain
@@ -249,12 +278,14 @@ export default function EvaluasiTes() {
   const [showModalBatal, setShowModalBatal] = useState(false)
   const sudahSimpanRef = useRef(false)
 
+  // Inisialisasi: acak soal DAN pilihan jawaban
   useEffect(() => {
     if (!data) return
-    setSoalAcak(acakArray(data.soal))
+    setSoalAcak(acakSoalDanPilihan(data.soal))
     setWaktu(data.durasi)
   }, [data, kategori])
 
+  // Timer countdown
   useEffect(() => {
     if (selesai || soalAcak.length === 0) return
     const interval = setInterval(() => {
@@ -270,6 +301,7 @@ export default function EvaluasiTes() {
     return () => clearInterval(interval)
   }, [selesai, soalAcak])
 
+  // Simpan skor saat selesai
   useEffect(() => {
     if (!selesai || sudahSimpanRef.current || soalAcak.length === 0) return
     sudahSimpanRef.current = true
@@ -279,8 +311,9 @@ export default function EvaluasiTes() {
     simpanRiwayat(kategori, data.nama, skor, total, persen)
   }, [selesai, riwayatJawaban, soalAcak, kategori, data])
 
+  // Ulang: acak ulang soal DAN pilihan
   const handleUlang = useCallback(() => {
-    setSoalAcak(acakArray(data.soal))
+    setSoalAcak(acakSoalDanPilihan(data.soal))
     setSoalIndex(0)
     setPilihanDipilih(null)
     setRiwayatJawaban([])
@@ -289,6 +322,7 @@ export default function EvaluasiTes() {
     sudahSimpanRef.current = false
   }, [data])
 
+  // Kategori tidak ditemukan
   if (!data) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center px-6">
@@ -300,6 +334,7 @@ export default function EvaluasiTes() {
     )
   }
 
+  // Tampilkan hasil
   if (selesai && soalAcak.length > 0) {
     const skor = riwayatJawaban.filter((r) => r.dipilih === r.jawabanBenar).length
     return (
@@ -312,6 +347,7 @@ export default function EvaluasiTes() {
     )
   }
 
+  // Loading
   if (soalAcak.length === 0) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
@@ -405,6 +441,7 @@ export default function EvaluasiTes() {
             {soalSaat.pertanyaan}
           </p>
 
+          {/* Pilihan jawaban (sudah teracak) */}
           <div className="flex flex-col gap-2 md:gap-3 mb-8 md:mb-10">
             {soalSaat.pilihan.map((pilihan, idx) => (
               <button
@@ -421,6 +458,7 @@ export default function EvaluasiTes() {
             ))}
           </div>
 
+          {/* Navigasi */}
           <div className="flex justify-between items-center">
             <button
               onClick={() => setShowModalBatal(true)}
