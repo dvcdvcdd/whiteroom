@@ -21,60 +21,49 @@ export default function Beranda() {
       {/* HERO */}
       <section className="min-h-[40vh] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-16 md:py-20 relative overflow-hidden">
         <div
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.02] dark:opacity-[0.04]"
           style={{
-            backgroundImage:
-              'linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px)',
             backgroundSize: '40px 40px',
           }}
         />
         <div className="relative max-w-7xl mx-auto w-full">
           <p className="section-label mb-3 md:mb-4">Evaluasi Kemampuan Berpikir</p>
-          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-tight text-wr-black leading-[0.9] mb-4 md:mb-6">
-            WHITE
-            <br />
-            ROOM
+          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-tight text-wr-black dark:text-white leading-[0.9] mb-4 md:mb-6">
+            WHITE<br />ROOM
           </h1>
-          <p className="text-base md:text-xl text-wr-gray mb-2 md:mb-3 max-w-lg">
+          <p className="text-base md:text-xl text-wr-gray dark:text-zinc-400 mb-2 md:mb-3 max-w-lg">
             Asah kemampuan berpikir. Ukur hasilnya.
           </p>
-          <p className="text-xs md:text-sm text-wr-gray max-w-md mb-8 md:mb-10 leading-relaxed">
+          <p className="text-xs md:text-sm text-wr-gray dark:text-zinc-500 max-w-md mb-8 md:mb-10 leading-relaxed">
             Serangkaian tes terstruktur untuk melatih logika, memori, observasi,
             strategi, dan pengendalian diri. Soal diacak setiap sesi. Review
             jawaban tersedia setelah tes selesai.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <Link to="/evaluasi" className="btn-primary text-center">
-              Mulai Tes
-            </Link>
-            <Link to="/filosofi" className="btn-outline text-center">
-              Filosofi
-            </Link>
+            <Link to="/evaluasi" className="btn-primary text-center">Mulai Tes</Link>
+            <Link to="/filosofi" className="btn-outline text-center">Filosofi</Link>
           </div>
         </div>
       </section>
 
       {/* 5 KATEGORI */}
-      <section className="py-16 md:py-20 bg-wr-surface border-y border-wr-border">
+      <section className="py-16 md:py-20 bg-wr-surface dark:bg-zinc-900 border-y border-wr-border dark:border-zinc-800">
         <div className="page-container">
           <p className="section-label mb-6 md:mb-8">Lima Kategori Tes</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
             {pilar.map((p) => {
               const Icon = p.icon
               return (
-                <Link
-                  key={p.judul}
-                  to={p.path}
-                  className="card-wr flex flex-col gap-3 group"
-                >
-                  <div className="w-10 h-10 border border-wr-border flex items-center justify-center group-hover:border-wr-black transition-colors">
-                    <Icon size={18} className="text-wr-black" />
+                <Link key={p.judul} to={p.path} className="card-wr flex flex-col gap-3 group">
+                  <div className="w-10 h-10 border border-wr-border dark:border-zinc-700 flex items-center justify-center group-hover:border-wr-black dark:group-hover:border-zinc-400 transition-colors">
+                    <Icon size={18} className="text-wr-black dark:text-white" />
                   </div>
-                  <h3 className="text-sm font-bold tracking-widest uppercase text-wr-black">
+                  <h3 className="text-sm font-bold tracking-widest uppercase text-wr-black dark:text-white">
                     {p.judul}
                   </h3>
-                  <p className="text-sm text-wr-gray leading-relaxed">{p.desc}</p>
-                  <span className="text-xs font-mono text-wr-gray group-hover:text-wr-black transition-colors mt-auto">
+                  <p className="text-sm text-wr-gray dark:text-zinc-400 leading-relaxed">{p.desc}</p>
+                  <span className="text-xs font-mono text-wr-gray dark:text-zinc-500 group-hover:text-wr-black dark:group-hover:text-white transition-colors mt-auto">
                     Mulai tes →
                   </span>
                 </Link>
@@ -88,16 +77,16 @@ export default function Beranda() {
       <section className="py-16 md:py-20">
         <div className="page-container">
           <p className="section-label mb-6 md:mb-8">Cara Kerja</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-px md:bg-wr-border max-w-3xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl">
             {caraKerja.map((step) => (
-              <div key={step.nomor} className="bg-white p-6 md:p-8 border border-wr-border md:border-0">
-                <span className="font-mono text-2xl md:text-3xl font-bold text-gray-100 block mb-3 md:mb-4">
+              <div key={step.nomor} className="bg-white dark:bg-zinc-900 p-6 md:p-8 border border-wr-border dark:border-zinc-800">
+                <span className="font-mono text-2xl md:text-3xl font-bold text-gray-100 dark:text-zinc-800 block mb-3 md:mb-4">
                   {step.nomor}
                 </span>
-                <h3 className="text-sm font-bold tracking-widest uppercase text-wr-black mb-2">
+                <h3 className="text-sm font-bold tracking-widest uppercase text-wr-black dark:text-white mb-2">
                   {step.judul}
                 </h3>
-                <p className="text-sm text-wr-gray leading-relaxed">{step.desc}</p>
+                <p className="text-sm text-wr-gray dark:text-zinc-400 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -105,7 +94,7 @@ export default function Beranda() {
       </section>
 
       {/* CTA */}
-      <section className="bg-wr-black py-16 md:py-20">
+      <section className="bg-wr-black dark:bg-zinc-900 dark:border-t dark:border-zinc-800 py-16 md:py-20">
         <div className="page-container text-center">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-tight mb-4">
             Siap Mengasah Otakmu?

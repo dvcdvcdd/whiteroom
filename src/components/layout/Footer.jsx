@@ -3,7 +3,7 @@ import { Github, Instagram } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="bg-wr-black text-white">
+    <footer className="bg-wr-black text-white dark:bg-zinc-900 dark:border-t dark:border-zinc-800">
       <div className="page-container py-10 md:py-12">
         <div className="flex flex-col gap-8 md:flex-row md:justify-between md:items-start">
           <div>
@@ -26,7 +26,9 @@ export default function Footer() {
                 aria-label="Instagram"
               >
                 <Instagram size={14} className="group-hover:scale-110 transition-transform" />
-                <span className="text-[10px] md:text-xs font-mono tracking-widest uppercase">Instagram</span>
+                <span className="text-[10px] md:text-xs font-mono tracking-widest uppercase">
+                  Instagram
+                </span>
               </a>
               <a
                 href="https://github.com/dvcdvcdd"
@@ -36,16 +38,28 @@ export default function Footer() {
                 aria-label="GitHub"
               >
                 <Github size={14} className="group-hover:scale-110 transition-transform" />
-                <span className="text-[10px] md:text-xs font-mono tracking-widest uppercase">GitHub</span>
+                <span className="text-[10px] md:text-xs font-mono tracking-widest uppercase">
+                  GitHub
+                </span>
               </a>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-4 md:gap-6">
-            <Link to="/" className="text-[10px] md:text-xs text-gray-500 hover:text-white transition-colors tracking-widest uppercase font-mono">Beranda</Link>
-            <Link to="/filosofi" className="text-[10px] md:text-xs text-gray-500 hover:text-white transition-colors tracking-widest uppercase font-mono">Filosofi</Link>
-            <Link to="/evaluasi" className="text-[10px] md:text-xs text-gray-500 hover:text-white transition-colors tracking-widest uppercase font-mono">Evaluasi</Link>
-            <Link to="/statistik" className="text-[10px] md:text-xs text-gray-500 hover:text-white transition-colors tracking-widest uppercase font-mono">Statistik</Link>
+            {[
+              { label: 'Beranda', path: '/' },
+              { label: 'Filosofi', path: '/filosofi' },
+              { label: 'Evaluasi', path: '/evaluasi' },
+              { label: 'Statistik', path: '/statistik' },
+            ].map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className="text-[10px] md:text-xs text-gray-500 hover:text-white transition-colors tracking-widest uppercase font-mono"
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
 
@@ -55,10 +69,22 @@ export default function Footer() {
               © {new Date().getFullYear()} Whiteroom
             </p>
             <div className="flex items-center gap-4">
-              <a href="https://instagram.com/USERNAME_KAMU" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-white transition-colors" aria-label="Instagram">
+              <a
+                href="https://instagram.com/USERNAME_KAMU"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-700 hover:text-white transition-colors"
+                aria-label="Instagram"
+              >
                 <Instagram size={13} />
               </a>
-              <a href="https://github.com/dvcdvcdd" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-white transition-colors" aria-label="GitHub">
+              <a
+                href="https://github.com/dvcdvcdd"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-700 hover:text-white transition-colors"
+                aria-label="GitHub"
+              >
                 <Github size={13} />
               </a>
             </div>
