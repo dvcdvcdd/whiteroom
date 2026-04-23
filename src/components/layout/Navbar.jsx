@@ -6,6 +6,7 @@ const menuItems = [
   { label: 'Beranda', path: '/' },
   { label: 'Filosofi', path: '/filosofi' },
   { label: 'Evaluasi', path: '/evaluasi' },
+  { label: 'Statistik', path: '/statistik' },
 ]
 
 export default function Navbar() {
@@ -46,7 +47,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden p-2 text-wr-black"
+            className="md:hidden p-2 text-wr-black hover:text-wr-gray transition-colors"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X size={20} /> : <Menu size={20} />}

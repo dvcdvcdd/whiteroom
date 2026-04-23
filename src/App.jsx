@@ -5,6 +5,7 @@ import Beranda from './pages/Beranda'
 import Filosofi from './pages/Filosofi'
 import Evaluasi from './pages/Evaluasi'
 import EvaluasiTes from './pages/EvaluasiTes'
+import Statistik from './pages/Statistik'
 import NotFound from './pages/404'
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
             <Route path="/filosofi" element={<Filosofi />} />
             <Route path="/evaluasi" element={<Evaluasi />} />
             <Route path="/evaluasi/:kategori" element={<EvaluasiTes />} />
+            <Route path="/statistik" element={<Statistik />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
