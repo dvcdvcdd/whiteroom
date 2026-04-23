@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Brain, Database, Eye, Target, Shield, RotateCcw } from 'lucide-react'
+import { Brain, Database, Eye, Target, Shield, RotateCcw, Clock, BookOpen } from 'lucide-react'
 import Badge from '../components/ui/Badge'
 
 const kategoriTes = [
@@ -95,10 +95,26 @@ export default function Evaluasi() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-wr-black mb-3 md:mb-4 max-w-2xl">
             Pilih Tes
           </h1>
-          <p className="text-base md:text-lg text-wr-gray max-w-xl">
-            Pilih kategori dan mulai kerjakan. Skor dan review jawaban
-            langsung ditampilkan setelah selesai.
+          <p className="text-base md:text-lg text-wr-gray max-w-xl mb-4">
+            Pilih kategori dan mode yang kamu inginkan.
           </p>
+          {/* Penjelasan mode */}
+          <div className="flex flex-col sm:flex-row gap-3 max-w-xl">
+            <div className="flex items-start gap-2 text-xs text-wr-gray bg-wr-surface border border-wr-border p-3">
+              <Clock size={14} className="flex-shrink-0 mt-0.5 text-wr-black" />
+              <div>
+                <span className="font-bold text-wr-black">Mode Evaluasi</span>
+                <span className="block">Ada timer, skor disimpan ke riwayat.</span>
+              </div>
+            </div>
+            <div className="flex items-start gap-2 text-xs text-wr-gray bg-wr-surface border border-wr-border p-3">
+              <BookOpen size={14} className="flex-shrink-0 mt-0.5 text-wr-black" />
+              <div>
+                <span className="font-bold text-wr-black">Mode Latihan</span>
+                <span className="block">Tanpa timer, penjelasan langsung muncul tiap soal.</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -132,12 +148,23 @@ export default function Evaluasi() {
                     <span>{tes.waktu}</span>
                   </div>
 
-                  <Link
-                    to={`/evaluasi/${tes.id}`}
-                    className="btn-primary text-xs py-3 text-center"
-                  >
-                    Mulai Tes
-                  </Link>
+                  {/* 2 tombol: Evaluasi & Latihan */}
+                  <div className="flex flex-col gap-2">
+                    <Link
+                      to={`/evaluasi/${tes.id}?mode=evaluasi`}
+                      className="btn-primary text-xs py-2.5 text-center flex items-center justify-center gap-2"
+                    >
+                      <Clock size={12} />
+                      Mode Evaluasi
+                    </Link>
+                    <Link
+                      to={`/evaluasi/${tes.id}?mode=latihan`}
+                      className="btn-outline text-xs py-2.5 text-center flex items-center justify-center gap-2"
+                    >
+                      <BookOpen size={12} />
+                      Mode Latihan
+                    </Link>
+                  </div>
                 </div>
               )
             })}
@@ -162,7 +189,7 @@ export default function Evaluasi() {
                 </button>
               </div>
 
-              {/* Mobile: card layout */}
+              {/* Mobile: card */}
               <div className="flex flex-col gap-3 sm:hidden">
                 {riwayat.map((r, i) => (
                   <div key={i} className="border border-wr-border p-4 bg-white">
@@ -178,7 +205,7 @@ export default function Evaluasi() {
                         <span>{r.skor}/{r.total}</span>
                       </div>
                       <Link
-                        to={`/evaluasi/${r.kategori}`}
+                        to={`/evaluasi/${r.kategori}?mode=evaluasi`}
                         className="text-xs font-mono text-wr-gray hover:text-wr-black transition-colors tracking-widest uppercase"
                       >
                         Ulangi
@@ -188,49 +215,30 @@ export default function Evaluasi() {
                 ))}
               </div>
 
-              {/* Desktop: table layout */}
+              {/* Desktop: table */}
               <div className="hidden sm:block overflow-x-auto">
                 <table className="w-full border-collapse">
                   <thead>
                     <tr className="border-b border-wr-border">
-                      <th className="text-left py-3 px-4 text-xs font-mono tracking-widest text-wr-gray uppercase">
-                        Tanggal
-                      </th>
-                      <th className="text-left py-3 px-4 text-xs font-mono tracking-widest text-wr-gray uppercase">
-                        Tes
-                      </th>
-                      <th className="text-left py-3 px-4 text-xs font-mono tracking-widest text-wr-gray uppercase">
-                        Skor
-                      </th>
-                      <th className="text-left py-3 px-4 text-xs font-mono tracking-widest text-wr-gray uppercase">
-                        Persen
-                      </th>
+                      <th className="text-left py-3 px-4 text-xs font-mono tracking-widest text-wr-gray uppercase">Tanggal</th>
+                      <th className="text-left py-3 px-4 text-xs font-mono tracking-widest text-wr-gray uppercase">Tes</th>
+                      <th className="text-left py-3 px-4 text-xs font-mono tracking-widest text-wr-gray uppercase">Skor</th>
+                      <th className="text-left py-3 px-4 text-xs font-mono tracking-widest text-wr-gray uppercase">Persen</th>
                       <th className="py-3 px-4" />
                     </tr>
                   </thead>
                   <tbody>
                     {riwayat.map((r, i) => (
-                      <tr
-                        key={i}
-                        className="border-b border-wr-border hover:bg-wr-surface transition-colors"
-                      >
-                        <td className="py-3 px-4 text-xs font-mono text-wr-gray">
-                          {r.tanggal}
-                        </td>
-                        <td className="py-3 px-4 text-sm font-semibold text-wr-black">
-                          {r.nama}
-                        </td>
-                        <td className="py-3 px-4 text-sm font-mono font-bold text-wr-black">
-                          {r.skor}/{r.total}
-                        </td>
+                      <tr key={i} className="border-b border-wr-border hover:bg-wr-surface transition-colors">
+                        <td className="py-3 px-4 text-xs font-mono text-wr-gray">{r.tanggal}</td>
+                        <td className="py-3 px-4 text-sm font-semibold text-wr-black">{r.nama}</td>
+                        <td className="py-3 px-4 text-sm font-mono font-bold text-wr-black">{r.skor}/{r.total}</td>
                         <td className="py-3 px-4">
-                          <span className={`text-sm font-black font-mono ${skorWarna(r.persen)}`}>
-                            {r.persen}%
-                          </span>
+                          <span className={`text-sm font-black font-mono ${skorWarna(r.persen)}`}>{r.persen}%</span>
                         </td>
                         <td className="py-3 px-4 text-right">
                           <Link
-                            to={`/evaluasi/${r.kategori}`}
+                            to={`/evaluasi/${r.kategori}?mode=evaluasi`}
                             className="text-xs font-mono text-wr-gray hover:text-wr-black transition-colors tracking-widest uppercase"
                           >
                             Ulangi

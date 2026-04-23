@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, Link, useNavigate, useSearchParams } from 'react-router-dom'
 import tesData from '../data/tesData'
 import {
   CheckCircle,
@@ -8,6 +8,7 @@ import {
   ChevronRight,
   AlertTriangle,
   Clock,
+  BookOpen,
   X as XIcon,
 } from 'lucide-react'
 import ProgressBar from '../components/ui/ProgressBar'
@@ -24,21 +25,15 @@ function acakArray(arr) {
 
 function acakSoalDanPilihan(soalAsli) {
   const soalTeracak = acakArray(soalAsli)
-
   return soalTeracak.map((soal) => {
-    // Buat array index: [0, 1, 2, 3]
     const indexAsli = soal.pilihan.map((_, i) => i)
-    // Acak index
     const indexAcak = acakArray(indexAsli)
-    // Susun pilihan baru berdasarkan index acak
     const pilihanBaru = indexAcak.map((i) => soal.pilihan[i])
-    // Cari posisi baru jawaban benar
-    const jawabanBenrBaru = indexAcak.indexOf(soal.jawabanBenar)
-
+    const jawabanBenarBaru = indexAcak.indexOf(soal.jawabanBenar)
     return {
       ...soal,
       pilihan: pilihanBaru,
-      jawabanBenar: jawabanBenrBaru,
+      jawabanBenar: jawabanBenarBaru,
       pilihanAsli: soal.pilihan,
       jawabanBenarAsli: soal.jawabanBenar,
     }
@@ -50,62 +45,67 @@ function simpanRiwayat(kategori, nama, skor, total, persen) {
     const kunci = 'wr_riwayat'
     const riwayat = JSON.parse(localStorage.getItem(kunci) || '[]')
     riwayat.unshift({
-      kategori,
-      nama,
-      skor,
-      total,
-      persen,
+      kategori, nama, skor, total, persen,
       tanggal: new Date().toLocaleDateString('id-ID', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric',
+        day: 'numeric', month: 'short', year: 'numeric',
       }),
     })
     localStorage.setItem(kunci, JSON.stringify(riwayat.slice(0, 20)))
-  } catch {
-    // localStorage tidak tersedia
-  }
+  } catch { /* abaikan */ }
 }
 
 function getLevel(persen) {
-  if (persen <= 30)
-    return {
-      label: 'Rendah',
-      warna: 'text-red-700',
-      bg: 'bg-red-50 border-red-200',
-      pesan: 'Kemampuanmu di kategori ini masih perlu banyak latihan. Perhatikan penjelasan tiap soal dan coba lagi.',
-    }
-  if (persen <= 50)
-    return {
-      label: 'Cukup',
-      warna: 'text-yellow-700',
-      bg: 'bg-yellow-50 border-yellow-200',
-      pesan: 'Ada potensi yang bisa dikembangkan. Pelajari soal yang salah dan ulangi tes ini.',
-    }
-  if (persen <= 70)
-    return {
-      label: 'Baik',
-      warna: 'text-blue-700',
-      bg: 'bg-blue-50 border-blue-200',
-      pesan: 'Kemampuanmu di atas rata-rata. Latih konsistensi untuk mencapai level berikutnya.',
-    }
-  if (persen <= 85)
-    return {
-      label: 'Sangat Baik',
-      warna: 'text-green-700',
-      bg: 'bg-green-50 border-green-200',
-      pesan: 'Kamu menunjukkan kemampuan yang kuat. Pertahankan dan terus asah.',
-    }
-  return {
-    label: 'Luar Biasa',
-    warna: 'text-wr-black',
-    bg: 'bg-wr-muted border-wr-black',
-    pesan: 'Pencapaian luar biasa. Kamu berada di level tertinggi kategori ini.',
-  }
+  if (persen <= 30) return { label: 'Rendah', warna: 'text-red-700', bg: 'bg-red-50 border-red-200', pesan: 'Kemampuanmu di kategori ini masih perlu banyak latihan. Perhatikan penjelasan tiap soal dan coba lagi.' }
+  if (persen <= 50) return { label: 'Cukup', warna: 'text-yellow-700', bg: 'bg-yellow-50 border-yellow-200', pesan: 'Ada potensi yang bisa dikembangkan. Pelajari soal yang salah dan ulangi tes ini.' }
+  if (persen <= 70) return { label: 'Baik', warna: 'text-blue-700', bg: 'bg-blue-50 border-blue-200', pesan: 'Kemampuanmu di atas rata-rata. Latih konsistensi untuk mencapai level berikutnya.' }
+  if (persen <= 85) return { label: 'Sangat Baik', warna: 'text-green-700', bg: 'bg-green-50 border-green-200', pesan: 'Kamu menunjukkan kemampuan yang kuat. Pertahankan dan terus asah.' }
+  return { label: 'Luar Biasa', warna: 'text-wr-black', bg: 'bg-wr-muted border-wr-black', pesan: 'Pencapaian luar biasa. Kamu berada di level tertinggi kategori ini.' }
+}
+
+// ─── Feedback Soal (Mode Latihan) ─────────────────────────
+function FeedbackSoal({ soal, dipilih, onLanjut, isAkhir }) {
+  const benar = dipilih === soal.jawabanBenar
+
+  return (
+    <div className={`border p-4 md:p-6 mt-4 ${benar ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50'}`}>
+      <div className="flex items-center gap-2 mb-3">
+        {benar ? (
+          <CheckCircle size={18} className="text-green-600" />
+        ) : (
+          <XCircle size={18} className="text-red-600" />
+        )}
+        <span className={`text-sm font-bold ${benar ? 'text-green-700' : 'text-red-700'}`}>
+          {benar ? 'Jawaban Benar!' : 'Jawaban Salah'}
+        </span>
+      </div>
+
+      {!benar && (
+        <div className="text-xs md:text-sm px-3 py-2 mb-3 font-mono bg-green-100 text-green-800 break-words">
+          <span className="font-bold uppercase tracking-widest">Jawaban Benar: </span>
+          {soal.pilihanAsli ? soal.pilihanAsli[soal.jawabanBenarAsli] : soal.pilihan[soal.jawabanBenar]}
+        </div>
+      )}
+
+      {soal.penjelasan && (
+        <div className="text-xs md:text-sm px-3 py-2 bg-white border border-wr-border text-wr-gray leading-relaxed break-words mb-4">
+          <span className="font-bold font-mono uppercase tracking-widest text-wr-black">Penjelasan: </span>
+          {soal.penjelasan}
+        </div>
+      )}
+
+      <button
+        onClick={onLanjut}
+        className="btn-primary text-xs md:text-sm py-2.5 w-full flex items-center justify-center gap-2"
+      >
+        {isAkhir ? 'Lihat Hasil' : 'Soal Berikutnya'}
+        <ChevronRight size={14} />
+      </button>
+    </div>
+  )
 }
 
 // ─── Komponen Hasil ───────────────────────────────────────
-function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang }) {
+function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang, modeLatihan }) {
   const persen = Math.round((skor / total) * 100)
   const level = getLevel(persen)
   const [lihatReview, setLihatReview] = useState(false)
@@ -116,7 +116,14 @@ function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang }) {
         {/* Skor utama */}
         <div className="text-center mb-6 md:mb-8">
           <CheckCircle size={36} className="text-wr-black mx-auto mb-3 md:mb-4" />
-          <p className="section-label mb-2">Tes Selesai</p>
+          <p className="section-label mb-1">
+            {modeLatihan ? 'Latihan Selesai' : 'Tes Selesai'}
+          </p>
+          {modeLatihan && (
+            <p className="text-[10px] md:text-xs font-mono text-wr-gray mb-2">
+              Mode latihan — skor tidak disimpan ke riwayat
+            </p>
+          )}
           <p className="text-5xl md:text-6xl font-black font-mono text-wr-black mb-1">
             {skor}
             <span className="text-xl md:text-2xl text-wr-gray font-mono">/{total}</span>
@@ -152,26 +159,18 @@ function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang }) {
           </div>
         </div>
 
-        {/* Review toggle */}
+        {/* Review toggle (di mode latihan sudah lihat penjelasan, tapi tetap bisa buka) */}
         <button onClick={() => setLihatReview(!lihatReview)} className="w-full btn-outline mb-6 text-xs md:text-sm">
           {lihatReview ? 'Sembunyikan Review' : 'Lihat Review Jawaban'}
         </button>
 
-        {/* Review per soal */}
         {lihatReview && (
           <div className="flex flex-col gap-3 md:gap-4 mb-8">
-            <p className="text-xs font-mono tracking-widest text-wr-gray uppercase">
-              Review Jawaban
-            </p>
+            <p className="text-xs font-mono tracking-widest text-wr-gray uppercase">Review Jawaban</p>
             {soalDikerjakan.map((item, i) => {
               const benar = item.dipilih === item.jawabanBenar
               return (
-                <div
-                  key={item.id}
-                  className={`border p-4 md:p-5 ${
-                    benar ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'
-                  }`}
-                >
+                <div key={item.id} className={`border p-4 md:p-5 ${benar ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'}`}>
                   <div className="flex items-start gap-2 md:gap-3">
                     {benar ? (
                       <CheckCircle size={14} className="text-green-600 flex-shrink-0 mt-0.5" />
@@ -185,33 +184,19 @@ function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang }) {
                       <p className="text-xs md:text-sm font-semibold text-wr-black leading-relaxed mb-2 md:mb-3 whitespace-pre-line break-words">
                         {item.pertanyaan}
                       </p>
-
-                      {/* Jawaban yang dipilih */}
-                      <div className={`text-[10px] md:text-xs px-2 md:px-3 py-1.5 md:py-2 mb-2 font-mono break-words ${
-                        benar ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                      }`}>
-                        <span className="font-bold uppercase tracking-widest">
-                          {benar ? 'Benar:' : 'Salah:'}
-                        </span>{' '}
+                      <div className={`text-[10px] md:text-xs px-2 md:px-3 py-1.5 md:py-2 mb-2 font-mono break-words ${benar ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                        <span className="font-bold uppercase tracking-widest">{benar ? 'Benar:' : 'Salah:'}</span>{' '}
                         {item.dipilih !== null ? item.pilihan[item.dipilih] : 'Tidak dijawab'}
                       </div>
-
-                      {/* Jawaban benar (tampilkan dari pilihan asli) */}
                       {!benar && (
                         <div className="text-[10px] md:text-xs px-2 md:px-3 py-1.5 md:py-2 mb-2 font-mono bg-green-100 text-green-800 break-words">
                           <span className="font-bold uppercase tracking-widest">Jawaban Benar:</span>{' '}
-                          {item.pilihanAsli
-                            ? item.pilihanAsli[item.jawabanBenarAsli]
-                            : item.pilihan[item.jawabanBenar]}
+                          {item.pilihanAsli ? item.pilihanAsli[item.jawabanBenarAsli] : item.pilihan[item.jawabanBenar]}
                         </div>
                       )}
-
-                      {/* Penjelasan */}
                       {item.penjelasan && (
                         <div className="text-[10px] md:text-xs px-2 md:px-3 py-1.5 md:py-2 bg-white border border-wr-border text-wr-gray leading-relaxed break-words">
-                          <span className="font-bold font-mono uppercase tracking-widest text-wr-black">
-                            Penjelasan:{' '}
-                          </span>
+                          <span className="font-bold font-mono uppercase tracking-widest text-wr-black">Penjelasan: </span>
                           {item.penjelasan}
                         </div>
                       )}
@@ -248,15 +233,11 @@ function ModalKonfirmasi({ onLanjut, onBatal }) {
           <h3 className="text-sm md:text-base font-bold text-wr-black">Batalkan Tes?</h3>
         </div>
         <p className="text-xs md:text-sm text-wr-gray leading-relaxed mb-5 md:mb-6">
-          Semua progres tes ini akan hilang dan tidak disimpan. Yakin ingin keluar?
+          Semua progres akan hilang dan tidak disimpan. Yakin ingin keluar?
         </p>
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-          <button onClick={onLanjut} className="btn-primary flex-1 text-xs md:text-sm py-2.5">
-            Ya, Batalkan
-          </button>
-          <button onClick={onBatal} className="btn-outline flex-1 text-xs md:text-sm py-2.5">
-            Lanjutkan Tes
-          </button>
+          <button onClick={onLanjut} className="btn-primary flex-1 text-xs md:text-sm py-2.5">Ya, Batalkan</button>
+          <button onClick={onBatal} className="btn-outline flex-1 text-xs md:text-sm py-2.5">Lanjutkan</button>
         </div>
       </div>
     </div>
@@ -266,8 +247,12 @@ function ModalKonfirmasi({ onLanjut, onBatal }) {
 // ─── Halaman Utama ────────────────────────────────────────
 export default function EvaluasiTes() {
   const { kategori } = useParams()
+  const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const data = tesData[kategori]
+
+  // Deteksi mode dari URL: ?mode=latihan atau ?mode=evaluasi
+  const modeLatihan = searchParams.get('mode') === 'latihan'
 
   const [soalAcak, setSoalAcak] = useState([])
   const [soalIndex, setSoalIndex] = useState(0)
@@ -276,18 +261,19 @@ export default function EvaluasiTes() {
   const [selesai, setSelesai] = useState(false)
   const [waktu, setWaktu] = useState(0)
   const [showModalBatal, setShowModalBatal] = useState(false)
+  const [showFeedback, setShowFeedback] = useState(false)
   const sudahSimpanRef = useRef(false)
 
-  // Inisialisasi: acak soal DAN pilihan jawaban
+  // Inisialisasi soal
   useEffect(() => {
     if (!data) return
     setSoalAcak(acakSoalDanPilihan(data.soal))
-    setWaktu(data.durasi)
-  }, [data, kategori])
+    setWaktu(modeLatihan ? 0 : data.durasi)
+  }, [data, kategori, modeLatihan])
 
-  // Timer countdown
+  // Timer (hanya mode evaluasi)
   useEffect(() => {
-    if (selesai || soalAcak.length === 0) return
+    if (selesai || soalAcak.length === 0 || modeLatihan) return
     const interval = setInterval(() => {
       setWaktu((prev) => {
         if (prev <= 1) {
@@ -299,28 +285,28 @@ export default function EvaluasiTes() {
       })
     }, 1000)
     return () => clearInterval(interval)
-  }, [selesai, soalAcak])
+  }, [selesai, soalAcak, modeLatihan])
 
-  // Simpan skor saat selesai
+  // Simpan skor (hanya mode evaluasi)
   useEffect(() => {
-    if (!selesai || sudahSimpanRef.current || soalAcak.length === 0) return
+    if (!selesai || sudahSimpanRef.current || soalAcak.length === 0 || modeLatihan) return
     sudahSimpanRef.current = true
     const skor = riwayatJawaban.filter((r) => r.dipilih === r.jawabanBenar).length
     const total = soalAcak.length
     const persen = Math.round((skor / total) * 100)
     simpanRiwayat(kategori, data.nama, skor, total, persen)
-  }, [selesai, riwayatJawaban, soalAcak, kategori, data])
+  }, [selesai, riwayatJawaban, soalAcak, kategori, data, modeLatihan])
 
-  // Ulang: acak ulang soal DAN pilihan
   const handleUlang = useCallback(() => {
     setSoalAcak(acakSoalDanPilihan(data.soal))
     setSoalIndex(0)
     setPilihanDipilih(null)
     setRiwayatJawaban([])
     setSelesai(false)
-    setWaktu(data.durasi)
+    setShowFeedback(false)
+    setWaktu(modeLatihan ? 0 : data.durasi)
     sudahSimpanRef.current = false
-  }, [data])
+  }, [data, modeLatihan])
 
   // Kategori tidak ditemukan
   if (!data) {
@@ -343,6 +329,7 @@ export default function EvaluasiTes() {
         total={soalAcak.length}
         soalDikerjakan={riwayatJawaban}
         onUlang={handleUlang}
+        modeLatihan={modeLatihan}
       />
     )
   }
@@ -358,17 +345,30 @@ export default function EvaluasiTes() {
 
   const soalSaat = soalAcak[soalIndex]
   const progres = ((soalIndex + 1) / soalAcak.length) * 100
+  const isAkhir = soalIndex + 1 >= soalAcak.length
+
+  // Timer display (hanya mode evaluasi)
   const menit = Math.floor(waktu / 60)
   const detik = waktu % 60
   const timerStr = `${String(menit).padStart(2, '0')}:${String(detik).padStart(2, '0')}`
-  const isAkhir = soalIndex + 1 >= soalAcak.length
-  const hampirHabis = waktu <= 60 && waktu > 0
-  const sangatMendekat = waktu <= 10 && waktu > 0
+  const hampirHabis = !modeLatihan && waktu <= 60 && waktu > 0
+  const sangatMendekat = !modeLatihan && waktu <= 10 && waktu > 0
 
-  const handlePilih = (idx) => setPilihanDipilih(idx)
+  const handlePilih = (idx) => {
+    if (showFeedback) return // Tidak bisa ganti saat feedback tampil
+    setPilihanDipilih(idx)
+  }
 
   const handleSelanjutnya = () => {
     if (pilihanDipilih === null) return
+
+    // Mode latihan: tampilkan feedback dulu
+    if (modeLatihan && !showFeedback) {
+      setShowFeedback(true)
+      return
+    }
+
+    // Simpan jawaban
     const entri = { ...soalSaat, dipilih: pilihanDipilih }
     const riwayatBaru = [...riwayatJawaban, entri]
     setRiwayatJawaban(riwayatBaru)
@@ -378,6 +378,22 @@ export default function EvaluasiTes() {
     } else {
       setSoalIndex(soalIndex + 1)
       setPilihanDipilih(null)
+      setShowFeedback(false)
+    }
+  }
+
+  // Mode latihan: lanjut dari feedback
+  const handleLanjutDariFeedback = () => {
+    const entri = { ...soalSaat, dipilih: pilihanDipilih }
+    const riwayatBaru = [...riwayatJawaban, entri]
+    setRiwayatJawaban(riwayatBaru)
+
+    if (isAkhir) {
+      setSelesai(true)
+    } else {
+      setSoalIndex(soalIndex + 1)
+      setPilihanDipilih(null)
+      setShowFeedback(false)
     }
   }
 
@@ -392,36 +408,49 @@ export default function EvaluasiTes() {
 
       {/* Header bar */}
       <div className="sticky top-16 z-40 bg-white border-b border-wr-border">
+        {/* Timer warning (hanya mode evaluasi) */}
         {hampirHabis && (
           <div className={`flex items-center justify-center gap-2 py-1.5 md:py-2 text-[10px] md:text-xs font-mono font-bold tracking-widest uppercase ${
-            sangatMendekat
-              ? 'bg-red-600 text-white'
-              : 'bg-amber-50 text-amber-800 border-b border-amber-200'
+            sangatMendekat ? 'bg-red-600 text-white' : 'bg-amber-50 text-amber-800 border-b border-amber-200'
           }`}>
             <Clock size={10} />
             <span className="truncate">
-              {sangatMendekat
-                ? `WAKTU HAMPIR HABIS — ${timerStr}`
-                : `Sisa kurang dari 1 menit — ${timerStr}`}
+              {sangatMendekat ? `WAKTU HAMPIR HABIS — ${timerStr}` : `Sisa kurang dari 1 menit — ${timerStr}`}
             </span>
           </div>
         )}
 
         <div className="page-container">
           <div className="flex items-center justify-between h-10 md:h-12">
-            <span className="text-xs md:text-sm font-bold text-wr-black truncate mr-4">
-              {data.nama}
-            </span>
-            <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
-              <span className={`font-mono text-xs md:text-sm font-bold ${
-                sangatMendekat
-                  ? 'text-red-600 animate-pulse'
-                  : hampirHabis
-                  ? 'text-amber-600'
-                  : 'text-wr-black'
-              }`}>
-                {timerStr}
+            <div className="flex items-center gap-2 truncate mr-4">
+              <span className="text-xs md:text-sm font-bold text-wr-black truncate">
+                {data.nama}
               </span>
+              {/* Badge mode */}
+              <span className={`text-[10px] font-mono font-bold tracking-widest uppercase px-1.5 py-0.5 border flex-shrink-0 ${
+                modeLatihan
+                  ? 'bg-blue-50 text-blue-700 border-blue-200'
+                  : 'bg-wr-muted text-wr-gray border-wr-border'
+              }`}>
+                {modeLatihan ? 'Latihan' : 'Evaluasi'}
+              </span>
+            </div>
+            <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
+              {/* Timer (hanya mode evaluasi) */}
+              {!modeLatihan && (
+                <span className={`font-mono text-xs md:text-sm font-bold ${
+                  sangatMendekat ? 'text-red-600 animate-pulse' : hampirHabis ? 'text-amber-600' : 'text-wr-black'
+                }`}>
+                  {timerStr}
+                </span>
+              )}
+              {/* Tanpa timer di mode latihan */}
+              {modeLatihan && (
+                <span className="text-[10px] md:text-xs font-mono text-blue-600 flex items-center gap-1">
+                  <BookOpen size={10} />
+                  Santai
+                </span>
+              )}
               <span className="text-[10px] md:text-xs font-mono text-wr-gray">
                 {soalIndex + 1}/{soalAcak.length}
               </span>
@@ -441,46 +470,74 @@ export default function EvaluasiTes() {
             {soalSaat.pertanyaan}
           </p>
 
-          {/* Pilihan jawaban (sudah teracak) */}
-          <div className="flex flex-col gap-2 md:gap-3 mb-8 md:mb-10">
-            {soalSaat.pilihan.map((pilihan, idx) => (
+          {/* Pilihan jawaban */}
+          <div className="flex flex-col gap-2 md:gap-3">
+            {soalSaat.pilihan.map((pilihan, idx) => {
+              let btnClass = 'border-wr-border text-wr-gray hover:border-wr-black hover:text-wr-black bg-white'
+
+              if (showFeedback) {
+                // Mode latihan: highlight benar/salah
+                if (idx === soalSaat.jawabanBenar) {
+                  btnClass = 'border-green-400 bg-green-50 text-green-800 font-semibold'
+                } else if (idx === pilihanDipilih && idx !== soalSaat.jawabanBenar) {
+                  btnClass = 'border-red-400 bg-red-50 text-red-800 font-semibold'
+                } else {
+                  btnClass = 'border-wr-border text-wr-gray bg-white opacity-50'
+                }
+              } else if (pilihanDipilih === idx) {
+                btnClass = 'border-wr-black bg-wr-muted font-semibold text-wr-black'
+              }
+
+              return (
+                <button
+                  key={idx}
+                  onClick={() => handlePilih(idx)}
+                  disabled={showFeedback}
+                  className={`text-left px-4 py-3 md:px-5 md:py-4 border text-xs md:text-sm transition-all duration-150 ${btnClass} ${
+                    showFeedback ? 'cursor-default' : 'cursor-pointer'
+                  }`}
+                >
+                  {pilihan}
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Feedback (mode latihan) */}
+          {showFeedback && (
+            <FeedbackSoal
+              soal={soalSaat}
+              dipilih={pilihanDipilih}
+              onLanjut={handleLanjutDariFeedback}
+              isAkhir={isAkhir}
+            />
+          )}
+
+          {/* Navigasi (sembunyikan saat feedback tampil) */}
+          {!showFeedback && (
+            <div className="flex justify-between items-center mt-8 md:mt-10">
               <button
-                key={idx}
-                onClick={() => handlePilih(idx)}
-                className={`text-left px-4 py-3 md:px-5 md:py-4 border text-xs md:text-sm transition-all duration-150 ${
-                  pilihanDipilih === idx
-                    ? 'border-wr-black bg-wr-muted font-semibold text-wr-black'
-                    : 'border-wr-border text-wr-gray hover:border-wr-black hover:text-wr-black bg-white'
+                onClick={() => setShowModalBatal(true)}
+                className="text-[10px] md:text-xs text-wr-gray hover:text-wr-black transition-colors font-mono tracking-widest uppercase flex items-center gap-1"
+              >
+                <XIcon size={12} />
+                Batal
+              </button>
+
+              <button
+                onClick={handleSelanjutnya}
+                disabled={pilihanDipilih === null}
+                className={`flex items-center gap-1.5 md:gap-2 px-4 py-2.5 md:px-6 md:py-3 text-xs md:text-sm font-semibold tracking-widest uppercase border transition-all duration-200 ${
+                  pilihanDipilih !== null
+                    ? 'bg-wr-black text-white border-wr-black hover:bg-white hover:text-wr-black cursor-pointer'
+                    : 'bg-wr-muted text-wr-gray border-wr-border cursor-not-allowed'
                 }`}
               >
-                {pilihan}
+                {modeLatihan ? 'Cek Jawaban' : isAkhir ? 'Selesai' : 'Lanjut'}
+                <ChevronRight size={14} />
               </button>
-            ))}
-          </div>
-
-          {/* Navigasi */}
-          <div className="flex justify-between items-center">
-            <button
-              onClick={() => setShowModalBatal(true)}
-              className="text-[10px] md:text-xs text-wr-gray hover:text-wr-black transition-colors font-mono tracking-widest uppercase flex items-center gap-1"
-            >
-              <XIcon size={12} />
-              Batal
-            </button>
-
-            <button
-              onClick={handleSelanjutnya}
-              disabled={pilihanDipilih === null}
-              className={`flex items-center gap-1.5 md:gap-2 px-4 py-2.5 md:px-6 md:py-3 text-xs md:text-sm font-semibold tracking-widest uppercase border transition-all duration-200 ${
-                pilihanDipilih !== null
-                  ? 'bg-wr-black text-white border-wr-black hover:bg-white hover:text-wr-black cursor-pointer'
-                  : 'bg-wr-muted text-wr-gray border-wr-border cursor-not-allowed'
-              }`}
-            >
-              {isAkhir ? 'Selesai' : 'Lanjut'}
-              <ChevronRight size={14} />
-            </button>
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
