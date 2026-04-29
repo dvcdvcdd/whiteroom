@@ -5,6 +5,7 @@ const navLinks = [
   { label: 'Beranda', path: '/' },
   { label: 'Filosofi', path: '/filosofi' },
   { label: 'Evaluasi', path: '/evaluasi' },
+  { label: 'Ujian', path: '/ujian' },
   { label: 'Statistik', path: '/statistik' },
   { label: 'Profil', path: '/profil' },
 ]
@@ -76,7 +77,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-4">
               <a
-                href="https://instagram.com/USERNAME_KAMU"
+                href="https://www.instagram.com/Zakxyz.1945?igsh=MTFpZ2UwOWkxZg=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-700 hover:text-white transition-colors"

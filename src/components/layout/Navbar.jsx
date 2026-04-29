@@ -8,6 +8,7 @@ const menuItems = [
   { label: 'Beranda', path: '/' },
   { label: 'Filosofi', path: '/filosofi' },
   { label: 'Evaluasi', path: '/evaluasi' },
+  { label: 'Ujian', path: '/ujian' },
   { label: 'Statistik', path: '/statistik' },
   { label: 'Profil', path: '/profil' },
 ]
@@ -33,6 +34,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-white border-b border-wr-border dark:bg-zinc-950 dark:border-zinc-800 transition-colors duration-200">
       <div className="page-container">
         <div className="flex items-center justify-between h-16">
+          {/* Logo */}
           <Link
             to="/"
             className="text-base font-black tracking-ultra text-wr-black hover:text-wr-red dark:text-white dark:hover:text-zinc-400 transition-colors duration-200"
@@ -88,6 +90,7 @@ export default function Navbar() {
               </Link>
             )}
 
+            {/* Toggle Dark Mode Mobile */}
             <button
               onClick={toggle}
               className="p-2 text-wr-gray hover:text-wr-black dark:text-zinc-400 dark:hover:text-white transition-colors"
@@ -96,6 +99,7 @@ export default function Navbar() {
               {dark ? <Sun size={16} /> : <Moon size={16} />}
             </button>
 
+            {/* Hamburger */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="p-2 text-wr-black dark:text-white hover:text-wr-gray transition-colors"

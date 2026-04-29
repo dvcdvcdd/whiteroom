@@ -7,6 +7,7 @@ import Beranda from './pages/Beranda'
 import Filosofi from './pages/Filosofi'
 import Evaluasi from './pages/Evaluasi'
 import EvaluasiTes from './pages/EvaluasiTes'
+import UjianKomprehensif from './pages/UjianKomprehensif'
 import Statistik from './pages/Statistik'
 import Profil from './pages/Profil'
 import NotFound from './pages/404'
@@ -20,6 +21,7 @@ function AnimatedRoutes() {
         <Route path="/filosofi" element={<PageTransition><Filosofi /></PageTransition>} />
         <Route path="/evaluasi" element={<PageTransition><Evaluasi /></PageTransition>} />
         <Route path="/evaluasi/:kategori" element={<PageTransition><EvaluasiTes /></PageTransition>} />
+        <Route path="/ujian" element={<PageTransition><UjianKomprehensif /></PageTransition>} />
         <Route path="/statistik" element={<PageTransition><Statistik /></PageTransition>} />
         <Route path="/profil" element={<PageTransition><Profil /></PageTransition>} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
