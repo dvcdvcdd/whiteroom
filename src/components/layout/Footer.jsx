@@ -1,11 +1,20 @@
 import { Link } from 'react-router-dom'
 import { Github, Instagram } from 'lucide-react'
 
+const navLinks = [
+  { label: 'Beranda', path: '/' },
+  { label: 'Filosofi', path: '/filosofi' },
+  { label: 'Evaluasi', path: '/evaluasi' },
+  { label: 'Statistik', path: '/statistik' },
+  { label: 'Profil', path: '/profil' },
+]
+
 export default function Footer() {
   return (
     <footer className="bg-wr-black text-white dark:bg-zinc-900 dark:border-t dark:border-zinc-800">
       <div className="page-container py-10 md:py-12">
         <div className="flex flex-col gap-8 md:flex-row md:justify-between md:items-start">
+          {/* Logo + tagline + sosmed */}
           <div>
             <Link
               to="/"
@@ -45,13 +54,9 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* Navigasi */}
           <div className="flex flex-wrap gap-4 md:gap-6">
-            {[
-              { label: 'Beranda', path: '/' },
-              { label: 'Filosofi', path: '/filosofi' },
-              { label: 'Evaluasi', path: '/evaluasi' },
-              { label: 'Statistik', path: '/statistik' },
-            ].map((item) => (
+            {navLinks.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
@@ -63,6 +68,7 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Separator + copyright */}
         <div className="border-t border-gray-800 mt-8 pt-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
             <p className="text-[10px] md:text-xs text-gray-700 font-mono tracking-widest uppercase">

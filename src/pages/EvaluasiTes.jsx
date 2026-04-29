@@ -4,10 +4,11 @@ import tesData from '../data/tesData'
 import {
   CheckCircle, XCircle, RotateCcw, ChevronRight,
   AlertTriangle, Clock, BookOpen, Share2, Copy, Check,
-  X as XIcon,
+  X as XIcon, Flame,
 } from 'lucide-react'
 import ProgressBar from '../components/ui/ProgressBar'
 import VisualSoal from '../components/ui/VisualSoal'
+import { hitungPoin, simpanPoin } from '../utils/poinSystem'
 
 function acakArray(arr) {
   const hasil = [...arr]
@@ -82,7 +83,7 @@ function TombolBagikan({ skor, total, persen, namaKategori, level }) {
               <button onClick={() => doCopy(siteUrl)} className="flex items-center gap-2 px-3 py-2.5 text-xs font-mono tracking-widest uppercase text-wr-black dark:text-zinc-300 hover:bg-wr-surface dark:hover:bg-zinc-800 transition-colors w-full text-left"><Copy size={12} />Salin Link</button>
               <button onClick={() => { window.open(`https://wa.me/?text=${encodeURIComponent(teks)}`, '_blank'); setShowMenu(false) }} className="flex items-center gap-2 px-3 py-2.5 text-xs font-mono tracking-widest uppercase text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors w-full text-left"><Share2 size={12} />WhatsApp</button>
               <button onClick={() => { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(teks)}`, '_blank'); setShowMenu(false) }} className="flex items-center gap-2 px-3 py-2.5 text-xs font-mono tracking-widest uppercase text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors w-full text-left"><Share2 size={12} />Twitter / X</button>
-              {navigator.share && <button onClick={async () => { try { await navigator.share({ title: `Hasil Tes Whiteroom`, text: teks, url: siteUrl }) } catch {} setShowMenu(false) }} className="flex items-center gap-2 px-3 py-2.5 text-xs font-mono tracking-widest uppercase text-wr-black dark:text-zinc-300 hover:bg-wr-surface dark:hover:bg-zinc-800 transition-colors w-full text-left"><Share2 size={12} />Lainnya...</button>}
+              {navigator.share && <button onClick={async () => { try { await navigator.share({ title: 'Hasil Tes Whiteroom', text: teks, url: siteUrl }) } catch {} setShowMenu(false) }} className="flex items-center gap-2 px-3 py-2.5 text-xs font-mono tracking-widest uppercase text-wr-black dark:text-zinc-300 hover:bg-wr-surface dark:hover:bg-zinc-800 transition-colors w-full text-left"><Share2 size={12} />Lainnya...</button>}
             </div>
           </div>
         </>
@@ -108,7 +109,7 @@ function FeedbackSoal({ soal, dipilih, onLanjut, isAkhir }) {
 }
 
 // ─── Hasil ────────────────────────────────────────────────
-function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang, modeLatihan, namaKategori }) {
+function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang, modeLatihan, namaKategori, hasilPoin }) {
   const persen = Math.round((skor / total) * 100)
   const level = getLevel(persen)
   const [lihatReview, setLihatReview] = useState(false)
@@ -116,6 +117,7 @@ function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang, modeLatihan, nama
   return (
     <div className="px-4 sm:px-6 py-12 md:py-16">
       <div className="max-w-2xl mx-auto">
+        {/* Skor utama */}
         <div className="text-center mb-6 md:mb-8">
           <CheckCircle size={36} className="text-wr-black dark:text-white mx-auto mb-3 md:mb-4" />
           <p className="section-label mb-1">{modeLatihan ? 'Latihan Selesai' : 'Tes Selesai'}</p>
@@ -124,6 +126,7 @@ function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang, modeLatihan, nama
           <p className="text-xs md:text-sm font-mono text-wr-gray dark:text-zinc-500">{persen}% benar</p>
         </div>
 
+        {/* Level */}
         <div className={`border p-4 md:p-6 mb-4 ${level.bg}`}>
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-mono tracking-widest text-wr-gray dark:text-zinc-500 uppercase">Hasil</span>
@@ -133,7 +136,8 @@ function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang, modeLatihan, nama
           <p className="text-xs md:text-sm text-wr-gray dark:text-zinc-400 leading-relaxed mt-3 md:mt-4">{level.pesan}</p>
         </div>
 
-        <div className="grid grid-cols-3 gap-2 md:gap-3 mb-6">
+        {/* Ringkasan */}
+        <div className="grid grid-cols-3 gap-2 md:gap-3 mb-4">
           {[
             { val: skor, label: 'Benar', color: 'text-green-600 dark:text-green-400' },
             { val: total - skor, label: 'Salah', color: 'text-red-600 dark:text-red-400' },
@@ -146,10 +150,42 @@ function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang, modeLatihan, nama
           ))}
         </div>
 
+        {/* Info Poin (hanya mode evaluasi) */}
+        {hasilPoin && !modeLatihan && (
+          <div className="border border-wr-border dark:border-zinc-800 p-4 md:p-5 mb-4 bg-white dark:bg-zinc-900">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-mono tracking-widest text-wr-gray dark:text-zinc-500 uppercase">Poin Didapat</span>
+              <span className="text-lg font-black font-mono text-wr-black dark:text-white">+{hasilPoin.poinDapat}</span>
+            </div>
+
+            {hasilPoin.streakMultiplier > 1 && (
+              <p className="text-[10px] md:text-xs font-mono text-amber-600 dark:text-amber-400 mb-2 flex items-center gap-1">
+                <Flame size={12} /> Streak {hasilPoin.streak} hari — bonus ×{hasilPoin.streakMultiplier}
+              </p>
+            )}
+
+            <div className="flex items-center justify-between text-xs font-mono text-wr-gray dark:text-zinc-500 mb-2">
+              <span>{hasilPoin.kelasSesudah.nama}</span>
+              <span>{hasilPoin.totalPoin} poin total</span>
+            </div>
+
+            {hasilPoin.naikKelas && (
+              <div className="mt-3 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 text-center">
+                <p className="text-sm font-bold text-amber-800 dark:text-amber-300">🎉 Naik Kelas!</p>
+                <p className="text-xs font-mono text-amber-700 dark:text-amber-400 mt-1">
+                  {hasilPoin.kelasSebelum.nama} → {hasilPoin.kelasSesudah.nama}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Bagikan */}
         <div className="mb-4">
           <TombolBagikan skor={skor} total={total} persen={persen} namaKategori={namaKategori} level={level.label} />
         </div>
 
+        {/* Review */}
         <button onClick={() => setLihatReview(!lihatReview)} className="w-full btn-outline mb-6 text-xs md:text-sm">
           {lihatReview ? 'Sembunyikan Review' : 'Lihat Review Jawaban'}
         </button>
@@ -180,9 +216,11 @@ function HasilEvaluasi({ skor, total, soalDikerjakan, onUlang, modeLatihan, nama
           </div>
         )}
 
+        {/* Aksi */}
         <div className="flex flex-col gap-3">
           <button onClick={onUlang} className="btn-outline w-full flex items-center justify-center gap-2 text-xs md:text-sm"><RotateCcw size={14} />Coba Lagi</button>
           <Link to="/evaluasi" className="btn-primary w-full text-center text-xs md:text-sm">Pilih Tes Lain</Link>
+          {!modeLatihan && <Link to="/profil" className="btn-ghost w-full text-center text-xs md:text-sm">Lihat Profil</Link>}
         </div>
       </div>
     </div>
@@ -224,35 +262,69 @@ export default function EvaluasiTes() {
   const [waktu, setWaktu] = useState(0)
   const [showModalBatal, setShowModalBatal] = useState(false)
   const [showFeedback, setShowFeedback] = useState(false)
+  const [hasilPoin, setHasilPoin] = useState(null)
   const sudahSimpanRef = useRef(false)
 
-  useEffect(() => { if (!data) return; setSoalAcak(acakSoalDanPilihan(data.soal)); setWaktu(modeLatihan ? 0 : data.durasi) }, [data, kategori, modeLatihan])
+  useEffect(() => {
+    if (!data) return
+    setSoalAcak(acakSoalDanPilihan(data.soal))
+    setWaktu(modeLatihan ? 0 : data.durasi)
+  }, [data, kategori, modeLatihan])
 
   useEffect(() => {
     if (selesai || soalAcak.length === 0 || modeLatihan) return
-    const iv = setInterval(() => { setWaktu((p) => { if (p <= 1) { clearInterval(iv); setSelesai(true); return 0 } return p - 1 }) }, 1000)
+    const iv = setInterval(() => {
+      setWaktu((p) => { if (p <= 1) { clearInterval(iv); setSelesai(true); return 0 } return p - 1 })
+    }, 1000)
     return () => clearInterval(iv)
   }, [selesai, soalAcak, modeLatihan])
 
   useEffect(() => {
-    if (!selesai || sudahSimpanRef.current || soalAcak.length === 0 || modeLatihan) return
+    if (!selesai || sudahSimpanRef.current || soalAcak.length === 0) return
     sudahSimpanRef.current = true
     const s = riwayatJawaban.filter((r) => r.dipilih === r.jawabanBenar).length
-    simpanRiwayat(kategori, data.nama, s, soalAcak.length, Math.round((s / soalAcak.length) * 100))
+    const total = soalAcak.length
+    const persen = Math.round((s / total) * 100)
+
+    if (!modeLatihan) {
+      simpanRiwayat(kategori, data.nama, s, total, persen)
+      const poinBase = hitungPoin(persen, 'evaluasi')
+      const hasil = simpanPoin(poinBase)
+      setHasilPoin(hasil)
+    }
   }, [selesai, riwayatJawaban, soalAcak, kategori, data, modeLatihan])
 
   const handleUlang = useCallback(() => {
-    setSoalAcak(acakSoalDanPilihan(data.soal)); setSoalIndex(0); setPilihanDipilih(null); setRiwayatJawaban([]); setSelesai(false); setShowFeedback(false); setWaktu(modeLatihan ? 0 : data.durasi); sudahSimpanRef.current = false
+    setSoalAcak(acakSoalDanPilihan(data.soal))
+    setSoalIndex(0)
+    setPilihanDipilih(null)
+    setRiwayatJawaban([])
+    setSelesai(false)
+    setShowFeedback(false)
+    setHasilPoin(null)
+    setWaktu(modeLatihan ? 0 : data.durasi)
+    sudahSimpanRef.current = false
   }, [data, modeLatihan])
 
-  if (!data) return <div className="min-h-[60vh] flex items-center justify-center px-6"><div className="text-center"><p className="text-wr-gray dark:text-zinc-400 mb-4 text-sm">Kategori tidak ditemukan.</p><Link to="/evaluasi" className="btn-primary text-xs">Kembali</Link></div></div>
+  if (!data) return (
+    <div className="min-h-[60vh] flex items-center justify-center px-6">
+      <div className="text-center">
+        <p className="text-wr-gray dark:text-zinc-400 mb-4 text-sm">Kategori tidak ditemukan.</p>
+        <Link to="/evaluasi" className="btn-primary text-xs">Kembali</Link>
+      </div>
+    </div>
+  )
 
   if (selesai && soalAcak.length > 0) {
     const skor = riwayatJawaban.filter((r) => r.dipilih === r.jawabanBenar).length
-    return <HasilEvaluasi skor={skor} total={soalAcak.length} soalDikerjakan={riwayatJawaban} onUlang={handleUlang} modeLatihan={modeLatihan} namaKategori={data.nama} />
+    return <HasilEvaluasi skor={skor} total={soalAcak.length} soalDikerjakan={riwayatJawaban} onUlang={handleUlang} modeLatihan={modeLatihan} namaKategori={data.nama} hasilPoin={hasilPoin} />
   }
 
-  if (soalAcak.length === 0) return <div className="min-h-[60vh] flex items-center justify-center"><p className="text-wr-gray dark:text-zinc-400 text-sm font-mono">Memuat soal...</p></div>
+  if (soalAcak.length === 0) return (
+    <div className="min-h-[60vh] flex items-center justify-center">
+      <p className="text-wr-gray dark:text-zinc-400 text-sm font-mono">Memuat soal...</p>
+    </div>
+  )
 
   const soalSaat = soalAcak[soalIndex]
   const progres = ((soalIndex + 1) / soalAcak.length) * 100
@@ -270,19 +342,22 @@ export default function EvaluasiTes() {
     if (modeLatihan && !showFeedback) { setShowFeedback(true); return }
     const entri = { ...soalSaat, dipilih: pilihanDipilih }
     setRiwayatJawaban([...riwayatJawaban, entri])
-    if (isAkhir) { setSelesai(true) } else { setSoalIndex(soalIndex + 1); setPilihanDipilih(null); setShowFeedback(false) }
+    if (isAkhir) setSelesai(true)
+    else { setSoalIndex(soalIndex + 1); setPilihanDipilih(null); setShowFeedback(false) }
   }
 
   const handleLanjutFeedback = () => {
     const entri = { ...soalSaat, dipilih: pilihanDipilih }
     setRiwayatJawaban([...riwayatJawaban, entri])
-    if (isAkhir) { setSelesai(true) } else { setSoalIndex(soalIndex + 1); setPilihanDipilih(null); setShowFeedback(false) }
+    if (isAkhir) setSelesai(true)
+    else { setSoalIndex(soalIndex + 1); setPilihanDipilih(null); setShowFeedback(false) }
   }
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-zinc-950">
       {showModalBatal && <ModalKonfirmasi onLanjut={() => navigate('/evaluasi')} onBatal={() => setShowModalBatal(false)} />}
 
+      {/* Header */}
       <div className="sticky top-16 z-40 bg-white dark:bg-zinc-950 border-b border-wr-border dark:border-zinc-800">
         {hampirHabis && (
           <div className={`flex items-center justify-center gap-2 py-1.5 md:py-2 text-[10px] md:text-xs font-mono font-bold tracking-widest uppercase ${sangatMendekat ? 'bg-red-600 text-white' : 'bg-amber-50 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 border-b border-amber-200 dark:border-amber-800'}`}>
@@ -305,6 +380,7 @@ export default function EvaluasiTes() {
         <ProgressBar value={progres} showPercent={false} height="thin" />
       </div>
 
+      {/* Soal */}
       <div className="flex-1 flex items-center justify-center px-4 sm:px-6 py-8 md:py-12">
         <div className="max-w-2xl w-full">
           <p className="text-[10px] md:text-xs font-mono text-wr-gray dark:text-zinc-500 mb-3 md:mb-4 tracking-widest uppercase">Soal {soalIndex + 1} dari {soalAcak.length}</p>
