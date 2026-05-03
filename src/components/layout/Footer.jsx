@@ -29,7 +29,7 @@ export default function Footer() {
 
             <div className="flex items-center gap-4 mt-4">
               <a
-                href="https://instagram.com/USERNAME_KAMU"
+                href="https://www.instagram.com/Zakxyz.1945?igsh=MTFpZ2UwOWkxZg=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 text-gray-500 hover:text-white transition-colors group"
