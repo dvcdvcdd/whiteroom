@@ -11,7 +11,7 @@ import VisualSoal from '../components/ui/VisualSoal'
 import { hitungPoin, simpanPoin } from '../utils/poinSystem'
 
 const SOAL_PER_KATEGORI = 10
-const DURASI = 45 * 60
+const DURASI = 90 * 60
 const KATEGORI_LIST = [
   { id: 'logika', nama: 'Logika', icon: Brain },
   { id: 'memori', nama: 'Memori', icon: Database },
@@ -175,7 +175,7 @@ function IntroUjian({ onMulai }) {
               {[
                 { label: 'Total Soal', val: '50' },
                 { label: 'Kategori', val: '5' },
-                { label: 'Waktu', val: '45 menit' },
+                { label: 'Waktu', val: '90 menit' },
                 { label: 'Poin', val: '×2' },
               ].map((item) => (
                 <div key={item.label} className="border border-wr-border dark:border-zinc-800 p-4 text-center bg-white dark:bg-zinc-900">
@@ -439,8 +439,10 @@ export default function UjianKomprehensif() {
   const menit = Math.floor(waktu / 60)
   const detik = waktu % 60
   const timerStr = `${String(menit).padStart(2, '0')}:${String(detik).padStart(2, '0')}`
-  const hampirHabis = waktu <= 120 && waktu > 0
-  const sangatMendekat = waktu <= 30 && waktu > 0
+  const hampirHabis = waktu <= 600 && waktu > 0     
+  const sangatMendekat = waktu <= 120 && waktu > 0   
+  {sangatMendekat ? `WAKTU KRITIS — ${timerStr}` : `Sisa kurang dari 10 menit — ${timerStr}`}
+
 
   const handlePilih = (i) => setPilihanDipilih(i)
 

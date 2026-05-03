@@ -270,8 +270,9 @@ export default function EvaluasiTes() {
   const isAkhir = soalIndex + 1 >= soalAcak.length
   const menit = Math.floor(waktu / 60); const detik = waktu % 60
   const timerStr = `${String(menit).padStart(2, '0')}:${String(detik).padStart(2, '0')}`
-  const hampirHabis = !modeLatihan && waktu <= 60 && waktu > 0
-  const sangatMendekat = !modeLatihan && waktu <= 10 && waktu > 0
+  const hampirHabis = !modeLatihan && waktu <= 300 && waktu > 0    
+  const sangatMendekat = !modeLatihan && waktu <= 60 && waktu > 0
+  {sangatMendekat ? `WAKTU HAMPIR HABIS — ${timerStr}` : `Sisa kurang dari 5 menit — ${timerStr}`}   
 
   const handlePilih = (i) => { if (!showFeedback) setPilihanDipilih(i) }
   const handleSelanjutnya = () => {

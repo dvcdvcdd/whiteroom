@@ -4,11 +4,11 @@ import { Brain, Database, Eye, Target, Shield, RotateCcw, Clock, BookOpen } from
 import Badge from '../components/ui/Badge'
 
 const kategoriTes = [
-  { id: 'logika', nama: 'Tes Logika', icon: Brain, desc: 'Berpikir deduktif, induktif, dan analitis.', soal: 50, waktu: '25 menit', level: 'Menengah' },
-  { id: 'memori', nama: 'Tes Memori', icon: Database, desc: 'Kapasitas memori jangka pendek dan daya ingat.', soal: 50, waktu: '20 menit', level: 'Dasar' },
-  { id: 'observasi', nama: 'Tes Observasi', icon: Eye, desc: 'Ketajaman menangkap detail dan pola tersembunyi.', soal: 50, waktu: '20 menit', level: 'Menengah' },
-  { id: 'strategi', nama: 'Tes Strategi', icon: Target, desc: 'Perencanaan dan pengambilan keputusan taktis.', soal: 50, waktu: '30 menit', level: 'Lanjutan' },
-  { id: 'emosi', nama: 'Tes Kontrol Emosi', icon: Shield, desc: 'Stabilitas respons dalam situasi tekanan tinggi.', soal: 50, waktu: '20 menit', level: 'Menengah' },
+  { id: 'logika', nama: 'Tes Logika', icon: Brain, desc: 'Penalaran deduktif, induktif, dan analitis tingkat lanjut.', soal: 50, waktu: '60 menit', level: 'Lanjutan' },
+  { id: 'memori', nama: 'Tes Memori', icon: Database, desc: 'Manipulasi informasi, pola kompleks, dan rekonstruksi data.', soal: 50, waktu: '35 menit', level: 'Menengah' },
+  { id: 'observasi', nama: 'Tes Observasi', icon: Eye, desc: 'Deteksi pola berlapis, anomali, dan jebakan visual.', soal: 50, waktu: '40 menit', level: 'Menengah' },
+  { id: 'strategi', nama: 'Tes Strategi', icon: Target, desc: 'Analisis trade-off, dilema, dan pengambilan keputusan kompleks.', soal: 50, waktu: '50 menit', level: 'Lanjutan' },
+  { id: 'emosi', nama: 'Tes Kontrol Emosi', icon: Shield, desc: 'Respons dalam situasi ambigu dan tekanan berlapis.', soal: 50, waktu: '40 menit', level: 'Lanjutan' },
 ]
 
 function ambilRiwayat() {
